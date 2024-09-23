@@ -4,7 +4,7 @@ interface IProps {
 
 const ProductImage = ({ imageUrl }: IProps) => {
   return (
-    <div className="relative inline-block bg-transparent">
+    <div className="relative inline-block w-full bg-transparent">
       <GreyBackground />
       <img
         src={imageUrl}
