@@ -9,7 +9,7 @@ const ProductTitle = ({ title }: IProps) => {
     <div className="w-full">
       <Ellipsis
         title={title}
-        contentClassName="bold text-xl xs:text-lg tracking-wide mx-auto"
+        contentClassName="bold text-lg sm:text-xl lg:text-2xl tracking-wide mx-auto"
       />
     </div>
   );
