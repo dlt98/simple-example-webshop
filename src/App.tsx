@@ -2,14 +2,20 @@ import { useQuery } from "@tanstack/react-query";
 import { PRODUCT_KEYS } from "./api/products";
 import { fetchProducts } from "./api/products/productsApi";
 function App() {
-  const { data, error, isFetching } = useQuery({
+  const { data, isFetching } = useQuery({
     queryKey: [PRODUCT_KEYS.products],
     queryFn: fetchProducts,
   });
 
-  console.log("data", data);
+  if (isFetching) return <div>THIS IS FETCHING</div>;
 
-  return <div>THIS IS THE START PAGE</div>;
+  return (
+    <div>
+      {data?.products.map((product) => {
+        return <p>{product.title}</p>;
+      })}
+    </div>
+  );
 }
 
 export default App;
