@@ -1,5 +1,4 @@
-import { truncateString } from "../../utils";
-import { MAX_DESCRIPTION_LENGTH } from "./constants";
+import { ProductCardDescription } from "./components";
 
 interface IProps {
   title: string;
@@ -10,12 +9,12 @@ interface IProps {
 }
 
 const ProductCard = ({ description, image, onClick, price, title }: IProps) => {
-  const parsedDescription = truncateString(description, MAX_DESCRIPTION_LENGTH);
-
   return (
-    <div className="space-y-2 transition-all border rounded w-44 bg-slate-400 border-orange-50">
-      <p>{title}</p>
-      <p>{parsedDescription}</p>
+    <div className="roundedBrTl transitionColor group relative z-0 border border-neutral700 will-change-transform hover:border-neutral300 hover:bg-product-card-gradient md:h-[492px]">
+      <h3 className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
+        {title}
+      </h3>
+      <ProductCardDescription description={description} />
 
       <div>
         <img src={image} alt="Product image" />
