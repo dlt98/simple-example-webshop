@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { PRODUCT_KEYS } from "./api/products";
 import { fetchProducts } from "./api/products/productsApi";
+import { ProductCard } from "./components/productCard";
 function App() {
   const { data, isFetching } = useQuery({
     queryKey: [PRODUCT_KEYS.products],
@@ -11,8 +12,16 @@ function App() {
 
   return (
     <div>
-      {data?.products.map((product) => {
-        return <p>{product.title}</p>;
+      {data?.products.map(({ description, title, price, thumbnail }) => {
+        return (
+          <ProductCard
+            description={description}
+            title={title}
+            price={price}
+            image={thumbnail}
+            onClick={() => console.log("Click me")}
+          />
+        );
       })}
     </div>
   );
