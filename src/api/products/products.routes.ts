@@ -1,3 +1,5 @@
+import { BASE_ROUTE } from "../routes";
+
 export const PRODUCT_ROUTES = {
-  products: "https://dummyjson.com/products",
+  products: `${BASE_ROUTE}/products`,
 };
