@@ -1,3 +1,4 @@
+import { Ellipsis } from "../shared/ellipsis";
 import { ProductCardDescription } from "./components";
 
 interface IProps {
@@ -11,9 +12,7 @@ interface IProps {
 const ProductCard = ({ description, image, onClick, price, title }: IProps) => {
   return (
     <div className="roundedBrTl transitionColor group relative z-0 border border-neutral700 will-change-transform hover:border-neutral300 hover:bg-product-card-gradient md:h-[492px]">
-      <h3 className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
-        {title}
-      </h3>
+      <Ellipsis title={title} contentClassName="" />
       <ProductCardDescription description={description} />
 
       <div>
