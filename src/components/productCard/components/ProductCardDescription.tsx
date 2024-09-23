@@ -9,7 +9,7 @@ const ProductCardDescription = ({ description }: IProps) => {
   const parsedDescription = truncateString(description, MAX_DESCRIPTION_LENGTH);
 
   return (
-    <p className="mb-4 font-medium break-words line-clamp-5 whitespace-break-spaces text-neutral300">
+    <p className="mb-4 font-medium text-center break-words line-clamp-5 whitespace-break-spaces text-neutral300">
       {parsedDescription}
     </p>
   );

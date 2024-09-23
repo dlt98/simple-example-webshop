@@ -16,15 +16,12 @@ interface IProps {
 
 const ProductCard = ({ description, image, onClick, price, title }: IProps) => {
   return (
-    <div className="relative z-0 flex flex-col items-center pt-0 transition-all border shadow-lg p-7 delay-50000 roundedBrTl border-neutral700 hover:border-neutral300 hover:scale-105">
+    <div className="relative z-0 flex flex-col items-center gap-4 pt-0 transition-all border shadow-lg delay-400 p-7 roundedBrTl border-neutral700 hover:border-neutral300 hover:scale-105">
       <ProductImage imageUrl={image} />
       <ProductTitle title={title} />
       <ProductCardDescription description={description} />
 
-      <div>
-        <p>PRICE</p>
-        {price}$
-      </div>
+      <div>{price}$</div>
       <button onClick={onClick}>CLICK ME</button>
     </div>
   );
