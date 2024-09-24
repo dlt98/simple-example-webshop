@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 import { twMerge } from "tailwind-merge";
 
-import InfoIcon from "../../../assets/icons/InfoIcon.svg";
+import InfoIcon from "../../../assets/icons/info-icon.svg";
 
 import { generateRandomKey, truncateString } from "../../../utils";
 import { CustomTooltip } from "../tooltip";
