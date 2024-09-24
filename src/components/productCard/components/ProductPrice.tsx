@@ -13,10 +13,7 @@ const ProductPrice = ({ price, discountPercentage }: IProductPriceProps) => {
 
   return (
     <div className="flex flex-col items-center">
-      <Badge
-        variant={EBadgeVariant.notice}
-        text={`${discountPercentage}% OFF`}
-      />
+      <Badge variant={EBadgeVariant.red} text={`${discountPercentage}% OFF`} />
       <div className="flex items-center space-x-2">
         <span className="text-2xl font-bold text-green-600">
           ${discountedPrice?.toFixed(2)}
