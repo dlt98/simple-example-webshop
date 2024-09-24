@@ -12,17 +12,20 @@ function App() {
 
   return (
     <div className="grid grid-cols-1 gap-6 xs:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-      {data?.products.map(({ description, title, price, thumbnail }) => {
-        return (
-          <ProductCard
-            description={description}
-            title={title}
-            price={price}
-            image={thumbnail}
-            onClick={() => console.log("Click me")}
-          />
-        );
-      })}
+      {data?.products.map(
+        ({ description, title, price, thumbnail, discountPercentage }) => {
+          return (
+            <ProductCard
+              description={description}
+              title={title}
+              price={price}
+              discountPercentage={discountPercentage}
+              image={thumbnail}
+              onClick={() => console.log("Click me")}
+            />
+          );
+        }
+      )}
     </div>
   );
 }
