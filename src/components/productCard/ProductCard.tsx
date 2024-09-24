@@ -1,3 +1,4 @@
+import AddToCartButton from "../shared/addToCartButton/AddToCartButton";
 import {
   ProductCardDescription,
   ProductImage,
@@ -6,6 +7,7 @@ import {
 } from "./components";
 
 interface IProps {
+  id: number;
   title: string;
   image: string;
   price: number;
@@ -17,6 +19,7 @@ interface IProps {
 // https://cdn.dribbble.com/users/114038/screenshots/3674970/product_card_design_2x.png
 
 const ProductCard = ({
+  id,
   description,
   image,
   onClick,
@@ -32,7 +35,7 @@ const ProductCard = ({
       </button>
       <ProductCardDescription description={description} />
       <ProductPrice price={price} discountPercentage={discountPercentage} />
-      <button onClick={onClick}>CLICK ME</button>
+      <AddToCartButton productId={id} />
     </article>
   );
 };
