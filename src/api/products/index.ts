@@ -1,2 +1,2 @@
-export * from "./products.keys";
+export * from "../../constants";
 export * from "./products.routes";

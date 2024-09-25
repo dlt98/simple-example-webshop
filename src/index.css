@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .absoluteCenter {
+    @apply absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2;
+  }
+
+  .flexCenter {
+    @apply flex items-center justify-center;
+  }
+}
