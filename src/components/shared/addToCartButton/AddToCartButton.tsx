@@ -1,5 +1,5 @@
 import { useCart } from "../../../hooks";
-import { Button } from "../../core";
+import { Button, BUTTON_VARIANT } from "../../core";
 
 interface IProps {
   productId: number;
@@ -12,7 +12,11 @@ const AddToCartButton = ({ productId }: IProps) => {
     await upsertCart.mutateAsync(productId);
   };
 
-  return <Button onClick={onClickHandler}>Add to cart</Button>;
+  return (
+    <Button onClick={onClickHandler} variant={BUTTON_VARIANT.PRIMARY}>
+      Add to cart
+    </Button>
+  );
 };
 
 export default AddToCartButton;
