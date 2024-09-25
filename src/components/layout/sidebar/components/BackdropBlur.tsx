@@ -7,7 +7,7 @@ interface SheetProps {
   children: ReactNode;
 }
 
-const BackdropBlur = ({ open, onClick, children }: SheetProps) => {
+export const BackdropBlur = ({ open, onClick, children }: SheetProps) => {
   return (
     <>
       {children}
@@ -21,5 +21,3 @@ const BackdropBlur = ({ open, onClick, children }: SheetProps) => {
     </>
   );
 };
-
-export default BackdropBlur;
