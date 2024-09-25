@@ -1,5 +1,8 @@
 export interface ICartLocalStorage {
-  productIds: number[];
+  products: ICartSingleProduct[];
 }
 
-export type ILocalStorage = ICartLocalStorage;
+export interface ICartSingleProduct {
+  id: number;
+  amount: number;
+}

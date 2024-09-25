@@ -5,10 +5,11 @@ interface IProps {
   productId: number;
 }
 const AddToCartButton = ({ productId }: IProps) => {
-  const { addToCart } = useCart();
+  const { upsertCart } = useCart();
 
   const onClickHandler = async () => {
-    await addToCart.mutateAsync(productId);
+    console.log("upsertCart", upsertCart);
+    await upsertCart.mutateAsync(productId);
   };
 
   return <Button onClick={onClickHandler}>Add to cart</Button>;
