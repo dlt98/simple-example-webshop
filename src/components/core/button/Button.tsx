@@ -26,9 +26,9 @@ const Button = ({
   return (
     <button
       className={twMerge(
-        "flexCenter label-small transition-all whitespace-nowrap font-bold outline-none focus:outline-none disabled:pointer-events-none disabled:cursor-none disabled:transition-none",
+        "flexCenter label-small whitespace-nowrap font-bold outline-none transition-all focus:outline-none disabled:pointer-events-none disabled:cursor-none disabled:transition-none",
         BUTTON_VARIANT_CLASSNAME[variant],
-        className
+        className,
       )}
       disabled={disabled || isLoading}
       {...rest}

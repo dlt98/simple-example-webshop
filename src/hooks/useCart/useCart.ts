@@ -30,7 +30,7 @@ export const useCart = () => {
     },
     onSuccess: (data) => {
       queryClient.setQueryData([CART_KEYS.cart], data);
-      toast("Item added to cart!", {type:"success"})
+      toast("Item added to cart!", { type: "success" });
     },
   });
 

@@ -16,7 +16,7 @@ export const setCartToStorage = (cart: ICartLocalStorage) => {
 // Function to set the amount of a product in the cart
 export const setProductAmount = (
   cart: ICartLocalStorage,
-  newProduct: ICartSingleProduct
+  newProduct: ICartSingleProduct,
 ): ICartLocalStorage => {
   if (newProduct.amount === 0) {
     return removeProductFromCart(cart, newProduct.id);
@@ -28,10 +28,10 @@ export const setProductAmount = (
 // TEST:
 function updateProductAmount(
   cart: ICartLocalStorage,
-  newProduct: ICartSingleProduct
+  newProduct: ICartSingleProduct,
 ): ICartLocalStorage {
   const existingProductIndex = cart.products.findIndex(
-    (product) => product.id === newProduct.id
+    (product) => product.id === newProduct.id,
   );
 
   if (existingProductIndex > -1) {
@@ -45,7 +45,7 @@ function updateProductAmount(
 
 function removeProductFromCart(
   cart: ICartLocalStorage,
-  productId: IProduct["id"]
+  productId: IProduct["id"],
 ): ICartLocalStorage {
   return {
     ...cart,

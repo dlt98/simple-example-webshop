@@ -18,9 +18,9 @@ const Badge = ({
   return (
     <div
       className={twMerge(
-        "transition-all flexCenter rounded-full gap-1.5 px-1.5 py-[1px] disabled:bg-neutral900 disabled:text-neutral800",
+        "flexCenter disabled:bg-neutral900 disabled:text-neutral800 gap-1.5 rounded-full px-1.5 py-[1px] transition-all",
         badgeStyles[variant],
-        className
+        className,
       )}
     >
       {text || children}
