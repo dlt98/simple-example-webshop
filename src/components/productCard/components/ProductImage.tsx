@@ -9,7 +9,7 @@ const ProductImage = ({ imageUrl }: IProps) => {
       <img
         src={imageUrl}
         alt="Product image"
-        className="relative z-10 object-contain transition-all group-hover/product-image:scale-110 size-full"
+        className="relative z-10 object-contain transition-all size-full group-hover/product-image:scale-110"
       />
     </div>
   );
@@ -17,7 +17,7 @@ const ProductImage = ({ imageUrl }: IProps) => {
 
 function GreyBackground() {
   return (
-    <div className="z-0 w-full bg-gray-200 h-3/5 flexCenter absoluteCenter" />
+    <div className="z-0 w-full bg-gray-200 flexCenter absoluteCenter h-3/5" />
   );
 }
 

@@ -37,7 +37,7 @@ function App() {
                 onClick={() => console.log("Click me")}
               />
             );
-          }
+          },
         )}
       </div>
       <ToastContainer position="bottom-center" />

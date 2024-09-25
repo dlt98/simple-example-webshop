@@ -38,14 +38,14 @@ const Ellipsis = ({
       className={twMerge(
         "flex min-w-0 flex-grow items-center gap-1",
         shouldHaveEllipsis && "cursor-pointer",
-        className
+        className,
       )}
     >
       <div
         ref={textRef}
         className={twMerge(
           "max-w-full overflow-hidden text-ellipsis whitespace-nowrap",
-          contentClassName
+          contentClassName,
         )}
       >
         {generateContent()}
