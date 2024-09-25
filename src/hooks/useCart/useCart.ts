@@ -1,7 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { IProduct } from "../../types";
-import { CART_KEYS } from "../../constants";
+import { IProduct, IProductFetchRes } from "../../types";
+import { CART_KEYS, PRODUCT_KEYS } from "../../constants";
 import {
+  findSpecificProduct,
   getCartFromStorage,
   setCartToStorage,
   setProductAmount,
@@ -20,7 +21,29 @@ export const useCart = () => {
 
   const upsertCart = useMutation({
     mutationFn: (productId: IProduct["id"], amount = 1) => {
-      const product: ICartSingleProduct = { amount, id: productId };
+      const allProducts = queryClient.getQueryData<IProductFetchRes>([
+        PRODUCT_KEYS.products,
+      ]);
+
+      const productData = findSpecificProduct(allProducts, productId);
+
+      if (!productData) {
+        // This should never happen
+        toast("Error fetching products", {
+          type: "error",
+        });
+
+        return Promise.reject();
+      }
+
+      const product: ICartSingleProduct = {
+        amount,
+        id: productId,
+        imageSrc: productData.thumbnail,
+        name: productData.title,
+        price: productData.price,
+      };
+
       const updatedLocalStorage = setProductAmount(cart, product);
 
       setCartToStorage(updatedLocalStorage);
@@ -29,8 +52,10 @@ export const useCart = () => {
       return Promise.resolve(updatedLocalStorage);
     },
     onSuccess: (data) => {
-      queryClient.setQueryData([CART_KEYS.cart], data);
       toast("Item added to cart!", { type: "success" });
+
+      queryClient.setQueryData([CART_KEYS.cart], data); // Potentially not needed
+      queryClient.refetchQueries({ queryKey: [CART_KEYS.cart] });
     },
   });
 
@@ -48,6 +73,7 @@ export const useCart = () => {
 
   return {
     upsertCart,
+    cart,
 
     // removeFromCart,
     // clearCart,

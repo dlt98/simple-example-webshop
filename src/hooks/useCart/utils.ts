@@ -1,6 +1,6 @@
 import { CART_KEYS } from "../../constants";
 import { ICartLocalStorage, ICartSingleProduct } from "../../models";
-import { IProduct } from "../../types";
+import { IProduct, IProductFetchRes } from "../../types";
 import { DEFAULT_CART } from "./constants";
 
 export const getCartFromStorage = (): ICartLocalStorage => {
@@ -23,6 +23,13 @@ export const setProductAmount = (
   }
 
   return updateProductAmount(cart, newProduct);
+};
+
+export const findSpecificProduct = (
+  fetchedProducts: IProductFetchRes | undefined,
+  productId: number,
+) => {
+  return fetchedProducts?.products.find((product) => product.id === productId);
 };
 
 // TEST:
