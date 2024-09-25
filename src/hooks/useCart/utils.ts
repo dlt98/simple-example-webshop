@@ -37,15 +37,19 @@ function updateProductAmount(
   cart: ICartLocalStorage,
   newProduct: ICartSingleProduct,
 ): ICartLocalStorage {
-  const existingProductIndex = cart.products.findIndex(
+  const copiedProducts = [...cart.products];
+
+  const existingProductIndex = copiedProducts.findIndex(
     (product) => product.id === newProduct.id,
   );
 
   if (existingProductIndex > -1) {
-    cart.products[existingProductIndex].amount = newProduct.amount;
+    copiedProducts[existingProductIndex].amount = newProduct.amount;
   } else {
-    cart.products.push(newProduct);
+    copiedProducts.push(newProduct);
   }
+
+  cart.products = copiedProducts;
 
   return cart;
 }

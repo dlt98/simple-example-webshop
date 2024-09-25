@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 export const useCart = () => {
   const queryClient = useQueryClient();
 
-  const { data: cart = DEFAULT_CART } = useQuery<ICartLocalStorage>({
+  const { data: cart = DEFAULT_CART, refetch } = useQuery<ICartLocalStorage>({
     queryKey: [CART_KEYS.cart],
     queryFn: getCartFromStorage,
   });
@@ -44,38 +44,34 @@ export const useCart = () => {
         price: productData.price,
       };
 
-      const updatedLocalStorage = setProductAmount(cart, product);
+      const updatedLocalStorage = setProductAmount({ ...cart }, product);
 
       setCartToStorage(updatedLocalStorage);
 
       // Necessary to properly use addToCart
       return Promise.resolve(updatedLocalStorage);
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast("Item added to cart!", { type: "success" });
 
-      queryClient.setQueryData([CART_KEYS.cart], data); // Potentially not needed
-      queryClient.refetchQueries({ queryKey: [CART_KEYS.cart] });
+      queryClient.invalidateQueries({
+        queryKey: [CART_KEYS.cart],
+      });
     },
   });
 
-  //   const clearCart = useMutation(
-  //     () => {
-  //       setCartToStorage([]);
-  //       return [];
-  //     },
-  //     {
-  //       onSuccess: (data) => {
-  //         queryClient.setQueryData(CART_KEYS.cart, data);
-  //       },
-  //     }
-  //   );
+  const clearCart = () => {
+    const updatedLocalStorage = DEFAULT_CART;
+    setCartToStorage(updatedLocalStorage);
+
+    queryClient.setQueryData([CART_KEYS.cart], updatedLocalStorage);
+  };
 
   return {
     upsertCart,
     cart,
 
-    // removeFromCart,
-    // clearCart,
+    clearCart,
+    refetch,
   };
 };
