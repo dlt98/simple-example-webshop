@@ -5,6 +5,7 @@ import { ProductCard } from "./components/productCard";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Layout from "./components/layout/Layout";
 
 function App() {
   const { data, isFetching } = useQuery({
@@ -15,7 +16,7 @@ function App() {
   if (isFetching) return <div>THIS IS FETCHING</div>;
 
   return (
-    <>
+    <Layout>
       <div className="grid grid-cols-1 gap-6 xs:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         {data?.products.map(
           ({
@@ -37,11 +38,11 @@ function App() {
                 onClick={() => console.log("Click me")}
               />
             );
-          },
+          }
         )}
       </div>
       <ToastContainer position="bottom-center" />
-    </>
+    </Layout>
   );
 }
 
