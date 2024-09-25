@@ -4,12 +4,12 @@ interface IProps {
 
 const ProductImage = ({ imageUrl }: IProps) => {
   return (
-    <div className="group/product-image relative inline-block w-full bg-transparent">
+    <div className="relative inline-block w-full bg-transparent group/product-image">
       <GreyBackground />
       <img
         src={imageUrl}
         alt="Product image"
-        className="relative z-10 size-full object-contain transition-all group-hover/product-image:scale-110"
+        className="relative z-10 object-contain transition-all size-full group-hover/product-image:scale-110"
       />
     </div>
   );
@@ -17,7 +17,7 @@ const ProductImage = ({ imageUrl }: IProps) => {
 
 function GreyBackground() {
   return (
-    <div className="flexCenter absoluteCenter z-0 h-3/5 w-full bg-gray-200" />
+    <div className="z-0 w-full bg-gray-200 flexCenter absoluteCenter h-3/5" />
   );
 }
 

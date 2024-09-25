@@ -28,8 +28,8 @@ const ProductCard = ({
   discountPercentage,
 }: IProps) => {
   return (
-    <article className="roundedBrTl border-neutral700 hover:border-neutral300 relative z-0 flex flex-col items-center gap-4 border p-7 pt-0 shadow-lg transition-all">
-      <button className="h-max w-full" onClick={onClick}>
+    <article className="relative z-0 flex flex-col items-center gap-4 pt-0 transition-all border shadow-lg roundedBrTl border-neutral700 hover:border-neutral300 p-7">
+      <button className="w-full h-max" onClick={onClick}>
         <ProductImage imageUrl={image} />
         <ProductTitle title={title} />
       </button>
