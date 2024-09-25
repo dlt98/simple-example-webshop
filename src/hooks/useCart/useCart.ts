@@ -8,6 +8,7 @@ import {
 } from "./utils";
 import { ICartLocalStorage, ICartSingleProduct } from "../../models";
 import { DEFAULT_CART } from "./constants";
+import { toast } from "react-toastify";
 
 export const useCart = () => {
   const queryClient = useQueryClient();
@@ -29,6 +30,7 @@ export const useCart = () => {
     },
     onSuccess: (data) => {
       queryClient.setQueryData([CART_KEYS.cart], data);
+      toast("Item added to cart!", {type:"success"})
     },
   });
 
