@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, ReactElement } from "react";
 
 import { twMerge } from "tailwind-merge";
 
@@ -10,6 +10,7 @@ export interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   isLoading?: boolean;
   className?: string;
+  leftIcon?: ReactElement;
   iconClassName?: string;
 }
 
@@ -19,6 +20,7 @@ const Button = ({
   disabled,
   isLoading,
   className,
+  leftIcon,
   ...rest
 }: IProps) => {
   return (
@@ -31,6 +33,7 @@ const Button = ({
       disabled={disabled || isLoading}
       {...rest}
     >
+      {leftIcon && leftIcon}
       {children}
     </button>
   );
