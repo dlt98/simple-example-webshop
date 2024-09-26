@@ -1,18 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
-import { PRODUCT_KEYS } from "./api/products";
-import { fetchProducts } from "./api/products/productsApi";
 import { ProductCard } from "./components/productCard";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "./components/layout/Layout";
 import { ProductFilters } from "./components/filters";
+import { useGetProductsQuery } from "./hooks/queryHooks/products/useGetProductsQuery";
 
 function App() {
-  const { data, isFetching } = useQuery({
-    queryKey: [PRODUCT_KEYS.products],
-    queryFn: fetchProducts,
-  });
+  const { data, isFetching } = useGetProductsQuery();
 
   if (isFetching) return <div>THIS IS FETCHING</div>;
 
