@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { IProduct, IProductFetchRes } from "../../types";
+import { IProductFetchRes } from "../../types";
 import { CART_KEYS, PRODUCT_KEYS } from "../../constants";
 import {
   findSpecificProduct,
@@ -10,6 +10,7 @@ import {
 import { ICartLocalStorage, ICartSingleProduct } from "../../models";
 import { DEFAULT_CART } from "./constants";
 import { toast } from "react-toastify";
+import { IUpsertCartMutationData } from "./types";
 
 export const useCart = () => {
   const queryClient = useQueryClient();
@@ -19,8 +20,8 @@ export const useCart = () => {
     queryFn: getCartFromStorage,
   });
 
-  const upsertCart = useMutation({
-    mutationFn: (productId: IProduct["id"], amount = 1) => {
+  const upsertCartMutation = useMutation({
+    mutationFn: ({ productId, amount = 1 }: IUpsertCartMutationData) => {
       const allProducts = queryClient.getQueryData<IProductFetchRes>([
         PRODUCT_KEYS.products,
       ]);
@@ -53,7 +54,6 @@ export const useCart = () => {
     },
     onSuccess: () => {
       toast("Item added to cart!", { type: "success" });
-
       queryClient.invalidateQueries({
         queryKey: [CART_KEYS.cart],
       });
@@ -68,7 +68,7 @@ export const useCart = () => {
   };
 
   return {
-    upsertCart,
+    upsertCartMutation,
     cart,
 
     clearCart,
