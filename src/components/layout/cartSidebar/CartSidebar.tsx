@@ -1,7 +1,7 @@
 import Sidebar from "../../shared/sidebar/Sidebar";
-import shoppingCartIcon from "../../../assets/icons/shopping_cart.svg";
 import { useCart } from "../../../hooks";
 import { SingleCartItem } from "./components/SingleCartItem";
+import CartButton from "./components/CartButton";
 
 const CartSidebar = () => {
   const { cart, upsertCartMutation } = useCart();
@@ -9,13 +9,7 @@ const CartSidebar = () => {
   return (
     <Sidebar
       title="Shopping cart"
-      triggerButton={
-        <img
-          src={shoppingCartIcon}
-          alt="shopping cart icon"
-          className="size-6 text-white"
-        />
-      }
+      triggerButton={<CartButton cartProducts={cart.products} />}
       canvasClassName="space-y-3"
     >
       {cart.products?.map((singleProduct) => (
