@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 import closeIcon from "../../../../assets/icons/png/close-icon.png";
 import { Button, BUTTON_VARIANT } from "../../../core";
 import { SidebarCanvasHeader } from "./SidebarCanvasHeader";
+import { ESidebarPosition, SIDEBAR_POSITIONING_CLASS } from "../constants";
 
 interface SheetContentProps {
   children: ReactNode;
@@ -11,6 +12,7 @@ interface SheetContentProps {
   childrenClassName?: string;
   className?: string;
   title: string;
+  position: ESidebarPosition;
 }
 
 export const SidebarCanvas = ({
@@ -20,12 +22,16 @@ export const SidebarCanvas = ({
   childrenClassName,
   className,
   title,
+  position,
 }: SheetContentProps) => {
+  const { isClosed: isClosedClass, isOpen: isOpenClass } =
+    SIDEBAR_POSITIONING_CLASS[position];
+
   return (
     <div
       className={twMerge(
         "fixed inset-y-0 top-0 z-50 h-full w-3/4 gap-4 border-l p-4 shadow-lg transition-all duration-300 sm:max-w-sm sm:p-6",
-        isOpen ? "right-0" : "-right-full",
+        isOpen ? isOpenClass : isClosedClass,
         className,
       )}
     >

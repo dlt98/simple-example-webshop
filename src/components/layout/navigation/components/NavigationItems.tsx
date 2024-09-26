@@ -2,6 +2,7 @@ import Sidebar from "../../../shared/sidebar/Sidebar";
 import { NAVIGATION_ITEMS } from "../constants";
 import SingleNavigationItem from "./SingleNavigationItem";
 import burgerMenuIcon from "../../../../assets/icons/png/burger-menu-icon.png";
+import { ESidebarPosition } from "../../../shared/sidebar";
 
 const NavigationItems = () => {
   const navigationItems = (
@@ -26,8 +27,9 @@ const NavigationItems = () => {
           />
         }
         className="bg-white md:hidden"
-        triggerButtonClassName="md:hidden w-max "
+        triggerButtonClassName="md:hidden w-max"
         canvasClassName="mt-4"
+        position={ESidebarPosition.LEFT}
       >
         {navigationItems}
       </Sidebar>

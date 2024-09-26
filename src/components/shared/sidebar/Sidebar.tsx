@@ -3,6 +3,7 @@ import { Button, BUTTON_VARIANT } from "../../core";
 import { SidebarCanvas } from "./components/SidebarCanvas";
 import { BackdropBlur } from "./components/BackdropBlur";
 import { useBodyScroll } from "../../../hooks";
+import { ESidebarPosition } from "./constants";
 
 interface IProps {
   title: string;
@@ -11,6 +12,7 @@ interface IProps {
   canvasClassName?: string;
   className?: string;
   triggerButtonClassName?: string;
+  position?: ESidebarPosition;
 }
 
 const Sidebar = ({
@@ -20,6 +22,7 @@ const Sidebar = ({
   canvasClassName,
   className,
   triggerButtonClassName,
+  position = ESidebarPosition.RIGHT,
 }: IProps) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -41,6 +44,7 @@ const Sidebar = ({
         childrenClassName={canvasClassName}
         className={className}
         title={title}
+        position={position}
       >
         {children}
       </SidebarCanvas>
