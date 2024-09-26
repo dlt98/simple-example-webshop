@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Button, BUTTON_VARIANT } from "../../core";
 import { SidebarCanvas } from "./components/SidebarCanvas";
 import { BackdropBlur } from "./components/BackdropBlur";
@@ -13,6 +13,7 @@ interface IProps {
   className?: string;
   triggerButtonClassName?: string;
   position?: ESidebarPosition;
+  shouldClose?: boolean; // Used for external closing of the sidebar
 }
 
 const Sidebar = ({
@@ -23,8 +24,13 @@ const Sidebar = ({
   className,
   triggerButtonClassName,
   position = ESidebarPosition.RIGHT,
+  shouldClose = true,
 }: IProps) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    setIsSidebarOpen(false);
+  }, [shouldClose]);
 
   useBodyScroll(isSidebarOpen);
 
