@@ -24,11 +24,17 @@ export const SingleCartItem = ({
   };
 
   return (
-    <div className="flex items-center gap-4 rounded-lg border bg-white p-4 shadow-md">
-      <img src={imageSrc} alt={name} className="size-16 rounded object-cover" />
-      <div className="flex-1">
-        <h3 className="text-lg font-semibold">{name}</h3>
-        <p className="text-gray-600">${formatDecimals(price) ?? "N/A"}</p>
+    <div className="flex w-full items-center gap-4 rounded-lg border bg-white p-4 shadow-md max-sm:flex-col">
+      <div className="flexCenter">
+        <img
+          src={imageSrc}
+          alt={name}
+          className="size-16 rounded object-cover"
+        />
+        <div className="flex-1">
+          <h3 className="text-lg font-semibold">{name}</h3>
+          <p className="text-gray-600">${formatDecimals(price) ?? "N/A"}</p>
+        </div>
       </div>
       <div className="flex items-center space-x-2">
         <CircularButton onClick={handleQuantityChange} />

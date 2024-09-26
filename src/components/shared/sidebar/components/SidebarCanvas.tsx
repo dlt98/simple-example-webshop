@@ -24,7 +24,7 @@ export const SidebarCanvas = ({
   return (
     <div
       className={twMerge(
-        "fixed inset-y-0 top-0 z-50 h-full w-3/4 gap-4 border-l p-6 shadow-lg transition-all duration-300 sm:max-w-sm",
+        "fixed inset-y-0 top-0 z-50 h-full w-3/4 gap-4 border-l p-4 shadow-lg transition-all duration-300 sm:max-w-sm sm:p-6",
         isOpen ? "right-0" : "-right-full",
         className,
       )}
