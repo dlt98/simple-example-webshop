@@ -1,9 +1,9 @@
-import ReactSelect from "react-select";
+import ReactSelect, { SingleValue } from "react-select";
 import { ISingleSelectItem } from "./types";
 
 interface IProps {
   options: ISingleSelectItem[];
-  onChange: () => ISingleSelectItem;
+  onChange: (newValue: SingleValue<ISingleSelectItem>) => void;
 }
 
 export const Select = ({ options, onChange }: IProps) => {
