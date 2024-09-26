@@ -6,6 +6,7 @@ import { ProductCard } from "./components/productCard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "./components/layout/Layout";
+import { ProductFilters } from "./components/filters";
 
 function App() {
   const { data, isFetching } = useQuery({
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <Layout>
+      <ProductFilters />
       <div className="grid grid-cols-1 gap-6 xs:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         {data?.products.map(
           ({
