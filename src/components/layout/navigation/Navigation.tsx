@@ -1,33 +1,12 @@
-import Sidebar from "../sidebar/Sidebar";
+import CartSidebar from "../cartSidebar/CartSidebar";
 import NavigationItems from "./components/NavigationItems";
 
 export default function Navigation() {
   return (
-    <header className="flex flex-wrap items-center justify-between p-4 bg-background">
+    <header className="bg-background flex flex-wrap items-center justify-between p-4">
       <div className="text-2xl font-bold">Logo</div>
       <NavigationItems />
-      <Sidebar
-        title="Shopping cart"
-        triggerButton={
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="8" cy="21" r="1" />
-            <circle cx="19" cy="21" r="1" />
-            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
-          </svg>
-        }
-      >
-        Nothing here
-      </Sidebar>
+      <CartSidebar />
     </header>
   );
 }

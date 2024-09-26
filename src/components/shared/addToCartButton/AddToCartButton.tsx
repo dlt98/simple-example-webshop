@@ -6,10 +6,10 @@ interface IProps {
   productId: number;
 }
 const AddToCartButton = ({ productId }: IProps) => {
-  const { upsertCart } = useCart();
+  const { upsertCartMutation } = useCart();
 
   const onClickHandler = async () => {
-    await upsertCart.mutateAsync(productId);
+    await upsertCartMutation.mutateAsync({ productId });
   };
 
   return (

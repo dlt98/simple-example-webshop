@@ -53,7 +53,8 @@ export const useCart = () => {
       return Promise.resolve(updatedLocalStorage);
     },
     onSuccess: () => {
-      toast("Item added to cart!", { type: "success" });
+      toast("Cart successfully updated!", { type: "success" });
+
       queryClient.invalidateQueries({
         queryKey: [CART_KEYS.cart],
       });

@@ -4,7 +4,7 @@ import { useCart } from "../../../hooks";
 import { SingleCartItem } from "./components/SingleCartItem";
 
 const CartSidebar = () => {
-  const { cart } = useCart();
+  const { cart, upsertCartMutation } = useCart();
 
   return (
     <Sidebar
@@ -17,14 +17,12 @@ const CartSidebar = () => {
         />
       }
     >
-      {cart.products?.map((singleProduct) => {
-        return (
-          <SingleCartItem
-            {...singleProduct}
-            onQuantityChange={() => console.log("Check")}
-          />
-        );
-      })}
+      {cart.products?.map((singleProduct) => (
+        <SingleCartItem
+          {...singleProduct}
+          onQuantityChange={upsertCartMutation.mutateAsync}
+        />
+      ))}
     </Sidebar>
   );
 };

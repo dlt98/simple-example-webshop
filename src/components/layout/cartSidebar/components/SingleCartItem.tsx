@@ -1,23 +1,25 @@
-import { useState } from "react";
+import { IUpsertCartMutationData } from "../../../../hooks";
 import { ICartSingleProduct } from "../../../../models";
 
 interface IProps extends ICartSingleProduct {
-  onQuantityChange: (newQuantity: number) => void;
+  onQuantityChange: (productQuantity: IUpsertCartMutationData) => void;
 }
 
 export const SingleCartItem = ({
+  id,
   name,
   price = 0,
   amount,
   imageSrc,
   onQuantityChange,
 }: IProps) => {
-  const [itemQuantity, setItemQuantity] = useState(amount);
-
   const handleQuantityChange = (change: number) => {
-    const newQuantity = Math.max(0, itemQuantity + change);
-    setItemQuantity(newQuantity);
-    onQuantityChange(newQuantity);
+    const newQuantity = amount + change;
+
+    onQuantityChange({
+      productId: id,
+      amount: newQuantity,
+    });
   };
 
   return (
@@ -40,7 +42,7 @@ export const SingleCartItem = ({
           -
         </button>
         <span className="w-8 text-center" aria-label="Item amount">
-          {itemQuantity}
+          {amount}
         </span>
         <button
           onClick={() => handleQuantityChange(1)}
