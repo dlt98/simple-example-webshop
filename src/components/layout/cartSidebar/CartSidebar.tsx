@@ -23,6 +23,7 @@ const CartSidebar = () => {
           <SingleCartItem
             {...singleProduct}
             onQuantityChange={upsertCartMutation.mutateAsync}
+            key={singleProduct.id}
           />
         ))}
       </div>

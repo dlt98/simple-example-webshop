@@ -8,7 +8,7 @@ const NavigationItems = () => {
   const navigationItems = (
     <ul className="flex flex-col justify-center gap-3 md:flex-row md:gap-4">
       {NAVIGATION_ITEMS.map((item) => (
-        <SingleNavigationItem {...item} />
+        <SingleNavigationItem {...item} key={item.title} />
       ))}
     </ul>
   );

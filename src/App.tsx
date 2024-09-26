@@ -36,9 +36,10 @@ function App() {
                 discountPercentage={discountPercentage}
                 image={thumbnail}
                 onClick={() => console.log("Click me")}
+                key={id}
               />
             );
-          }
+          },
         )}
       </div>
       <ToastContainer position="bottom-center" />
