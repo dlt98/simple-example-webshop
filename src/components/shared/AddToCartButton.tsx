@@ -1,15 +1,15 @@
-import { useCart } from "../../../hooks";
-import { Button, BUTTON_VARIANT } from "../../core";
-import ShoppingCartIcon from "../../../assets/icons/shopping_cart.svg";
+import { useCart } from "../../hooks";
+import { Button, BUTTON_VARIANT } from "../core";
+import ShoppingCartIcon from "../../assets/icons/shopping_cart.svg";
 
 interface IProps {
   productId: number;
 }
 const AddToCartButton = ({ productId }: IProps) => {
-  const { upsertCart } = useCart();
+  const { upsertCartMutation } = useCart();
 
   const onClickHandler = async () => {
-    await upsertCart.mutateAsync(productId);
+    await upsertCartMutation.mutateAsync({ productId });
   };
 
   return (

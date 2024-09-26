@@ -1,6 +1,6 @@
 import { CART_KEYS } from "../../constants";
 import { ICartLocalStorage, ICartSingleProduct } from "../../models";
-import { IProduct } from "../../types";
+import { IProduct, IProductFetchRes } from "../../types";
 import { DEFAULT_CART } from "./constants";
 
 export const getCartFromStorage = (): ICartLocalStorage => {
@@ -25,20 +25,31 @@ export const setProductAmount = (
   return updateProductAmount(cart, newProduct);
 };
 
+export const findSpecificProduct = (
+  fetchedProducts: IProductFetchRes | undefined,
+  productId: number,
+) => {
+  return fetchedProducts?.products.find((product) => product.id === productId);
+};
+
 // TEST:
 function updateProductAmount(
   cart: ICartLocalStorage,
   newProduct: ICartSingleProduct,
 ): ICartLocalStorage {
-  const existingProductIndex = cart.products.findIndex(
+  const copiedProducts = [...cart.products];
+
+  const existingProductIndex = copiedProducts.findIndex(
     (product) => product.id === newProduct.id,
   );
 
   if (existingProductIndex > -1) {
-    cart.products[existingProductIndex].amount = newProduct.amount;
+    copiedProducts[existingProductIndex].amount = newProduct.amount;
   } else {
-    cart.products.push(newProduct);
+    copiedProducts.push(newProduct);
   }
+
+  cart.products = copiedProducts;
 
   return cart;
 }
