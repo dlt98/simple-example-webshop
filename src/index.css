@@ -27,4 +27,8 @@
   .animate-scale-down {
     animation: scale-up 0.5s ease-in-out reverse forwards;
   }
+
+  .noScroll {
+    overflow: hidden;
+  }
 }

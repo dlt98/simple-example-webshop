@@ -14,7 +14,7 @@ export const BackdropBlur = ({ open, onClick, children }: SheetProps) => {
       <div
         className={twMerge(
           `bg-background/80 fixed inset-0 backdrop-blur-sm transition-all duration-300`,
-          open ? "z-40 opacity-100" : "-z-10 opacity-0",
+          open ? "z-40 opacity-100" : "hidden opacity-0",
         )}
         onClick={onClick}
       />

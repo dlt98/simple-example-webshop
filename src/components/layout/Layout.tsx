@@ -10,7 +10,7 @@ const Layout = ({ children }: IProps) => {
     <>
       <Navigation />
       <main className="flex-grow p-8">
-        <h1 className="mb-4 text-3xl font-bold">Welcome to our website</h1>
+        <h1 className="mb-4 text-3xl font-bold">The best online web shop</h1>
         <div className="container mx-auto">{children}</div>
       </main>
       <Footer />

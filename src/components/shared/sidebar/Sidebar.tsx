@@ -2,6 +2,7 @@ import { ReactNode, useState } from "react";
 import { Button, BUTTON_VARIANT } from "../../core";
 import { SidebarCanvas } from "./components/SidebarCanvas";
 import { BackdropBlur } from "./components/BackdropBlur";
+import { useBodyScroll } from "../../../hooks";
 
 interface IProps {
   title: string;
@@ -18,7 +19,9 @@ const Sidebar = ({
   canvasClassName,
   className,
 }: IProps) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  useBodyScroll(isSidebarOpen);
 
   return (
     <BackdropBlur open={isSidebarOpen} onClick={() => setIsSidebarOpen(false)}>

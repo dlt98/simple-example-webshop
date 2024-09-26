@@ -4,7 +4,7 @@ import NavigationItems from "./components/NavigationItems";
 
 export default function Navigation() {
   return (
-    <header className="flex flex-wrap items-center justify-between bg-black p-4">
+    <header className="sticky top-0 z-50 flex flex-wrap items-center justify-between bg-black p-4">
       <Logo />
       <NavigationItems />
       <CartSidebar />
