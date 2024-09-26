@@ -7,12 +7,14 @@ interface SheetContentProps {
   children: ReactNode;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  childrenClassName?: string;
 }
 
 export const SidebarCanvas = ({
   children,
   isOpen,
   setIsOpen,
+  childrenClassName,
 }: SheetContentProps) => {
   return (
     <div
@@ -28,7 +30,7 @@ export const SidebarCanvas = ({
       >
         <img src={closeIcon} alt="sidebar close icon" />
       </Button>
-      <div>{children}</div>
+      <div className={childrenClassName}>{children}</div>
     </div>
   );
 };

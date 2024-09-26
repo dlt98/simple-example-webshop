@@ -16,6 +16,7 @@ const CartSidebar = () => {
           className="size-5"
         />
       }
+      canvasClassName="space-y-3"
     >
       {cart.products?.map((singleProduct) => (
         <SingleCartItem

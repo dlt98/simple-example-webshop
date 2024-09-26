@@ -8,10 +8,16 @@ interface IProps {
   title: string;
   children: ReactNode;
   triggerButton: ReactNode;
+  canvasClassName?: string;
 }
 
-const Sidebar = ({ title, children, triggerButton }: IProps) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+const Sidebar = ({
+  title,
+  children,
+  triggerButton,
+  canvasClassName,
+}: IProps) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <BackdropBlur open={isSidebarOpen} onClick={() => setIsSidebarOpen(false)}>
@@ -23,7 +29,11 @@ const Sidebar = ({ title, children, triggerButton }: IProps) => {
       >
         {triggerButton}
       </Button>
-      <SidebarCanvas isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen}>
+      <SidebarCanvas
+        isOpen={isSidebarOpen}
+        setIsOpen={setIsSidebarOpen}
+        childrenClassName={canvasClassName}
+      >
         <SidebarCanvasHeader title={title} />
         {children}
       </SidebarCanvas>
