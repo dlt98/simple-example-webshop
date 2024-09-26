@@ -4,3 +4,4 @@ export * from "./useCart";
 export * from "./useBodyScroll";
 export * from "./useMobileCheck";
 export * from "./queryHooks";
+export * from "./useQueryParamData";
