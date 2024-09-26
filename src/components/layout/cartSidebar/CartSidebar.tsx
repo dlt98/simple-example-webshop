@@ -13,7 +13,7 @@ const CartSidebar = () => {
         <img
           src={shoppingCartIcon}
           alt="shopping cart icon"
-          className="size-5"
+          className="size-6 text-white"
         />
       }
       canvasClassName="space-y-3"
