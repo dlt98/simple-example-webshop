@@ -10,6 +10,7 @@ interface IProps {
   triggerButton: ReactNode;
   canvasClassName?: string;
   className?: string;
+  triggerButtonClassName?: string;
 }
 
 const Sidebar = ({
@@ -18,6 +19,7 @@ const Sidebar = ({
   triggerButton,
   canvasClassName,
   className,
+  triggerButtonClassName,
 }: IProps) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -27,9 +29,9 @@ const Sidebar = ({
     <BackdropBlur open={isSidebarOpen} onClick={() => setIsSidebarOpen(false)}>
       <Button
         variant={BUTTON_VARIANT.ICON}
-        className="order-2 md:order-3"
+        className={triggerButtonClassName}
         onClick={() => setIsSidebarOpen(true)}
-        aria-label="Open sidebar button"
+        aria-label={`Open ${title} sidebar button`}
       >
         {triggerButton}
       </Button>
