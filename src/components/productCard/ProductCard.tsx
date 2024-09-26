@@ -1,4 +1,4 @@
-import AddToCartButton from "../shared/addToCartButton/AddToCartButton";
+import AddToCartButton from "../shared/AddToCartButton";
 import {
   ProductCardDescription,
   ProductImage,

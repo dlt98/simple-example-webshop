@@ -2,11 +2,11 @@ import { useRef } from "react";
 
 import { twMerge } from "tailwind-merge";
 
-import InfoIcon from "../../../assets/icons/info-icon.svg";
+import InfoIcon from "../../assets/icons/info-icon.svg";
 
-import { generateRandomKey, truncateString } from "../../../utils";
-import { CustomTooltip } from "../tooltip";
-import { useOverflowCheck } from "../../../hooks";
+import { generateRandomKey, truncateString } from "../../utils";
+import { CustomTooltip } from "./tooltip";
+import { useOverflowCheck } from "../../hooks";
 
 interface IProps {
   title: string;
@@ -15,7 +15,7 @@ interface IProps {
   contentClassName?: string;
 }
 
-const Ellipsis = ({
+export const Ellipsis = ({
   title,
   className,
   maxCharacters,
@@ -59,5 +59,3 @@ const Ellipsis = ({
     </div>
   );
 };
-
-export default Ellipsis;
