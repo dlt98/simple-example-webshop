@@ -11,6 +11,7 @@ import { ICartLocalStorage, ICartSingleProduct } from "../../models";
 import { DEFAULT_CART } from "./constants";
 import { toast } from "react-toastify";
 import { IUpsertCartMutationData } from "./types";
+import { formatDecimals } from "../../utils";
 
 export const useCart = () => {
   const queryClient = useQueryClient();
@@ -19,6 +20,13 @@ export const useCart = () => {
     queryKey: [CART_KEYS.cart],
     queryFn: getCartFromStorage,
   });
+
+  const cartTotal = formatDecimals(
+    cart.products.reduce(
+      (acc, product) => acc + product.price * product.amount,
+      0,
+    ),
+  );
 
   const upsertCartMutation = useMutation({
     mutationFn: ({ productId, amount = 1 }: IUpsertCartMutationData) => {
@@ -71,7 +79,7 @@ export const useCart = () => {
   return {
     upsertCartMutation,
     cart,
-
+    cartTotal,
     clearCart,
     refetch,
   };

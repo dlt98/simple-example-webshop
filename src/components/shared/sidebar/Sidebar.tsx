@@ -2,13 +2,13 @@ import { ReactNode, useState } from "react";
 import { Button, BUTTON_VARIANT } from "../../core";
 import { SidebarCanvas } from "./components/SidebarCanvas";
 import { BackdropBlur } from "./components/BackdropBlur";
-import { SidebarCanvasHeader } from "./components/SidebarCanvasHeader";
 
 interface IProps {
   title: string;
   children: ReactNode;
   triggerButton: ReactNode;
   canvasClassName?: string;
+  className?: string;
 }
 
 const Sidebar = ({
@@ -16,8 +16,9 @@ const Sidebar = ({
   children,
   triggerButton,
   canvasClassName,
+  className,
 }: IProps) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
     <BackdropBlur open={isSidebarOpen} onClick={() => setIsSidebarOpen(false)}>
@@ -33,8 +34,9 @@ const Sidebar = ({
         isOpen={isSidebarOpen}
         setIsOpen={setIsSidebarOpen}
         childrenClassName={canvasClassName}
+        className={className}
+        title={title}
       >
-        <SidebarCanvasHeader title={title} />
         {children}
       </SidebarCanvas>
     </BackdropBlur>

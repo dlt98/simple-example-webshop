@@ -4,20 +4,24 @@ import { SingleCartItem } from "./components/SingleCartItem";
 import CartButton from "./components/CartButton";
 
 const CartSidebar = () => {
-  const { cart, upsertCartMutation } = useCart();
+  const { cart, cartTotal, upsertCartMutation } = useCart();
 
   return (
     <Sidebar
       title="Shopping cart"
       triggerButton={<CartButton cartProducts={cart.products} />}
-      canvasClassName="space-y-3"
+      className="bg-white"
+      canvasClassName="mt-5"
     >
-      {cart.products?.map((singleProduct) => (
-        <SingleCartItem
-          {...singleProduct}
-          onQuantityChange={upsertCartMutation.mutateAsync}
-        />
-      ))}
+      <div className="flex flex-col items-center gap-3">
+        <h3 className="text-lg font-bold">${cartTotal}</h3>
+        {cart.products?.map((singleProduct) => (
+          <SingleCartItem
+            {...singleProduct}
+            onQuantityChange={upsertCartMutation.mutateAsync}
+          />
+        ))}
+      </div>
     </Sidebar>
   );
 };
