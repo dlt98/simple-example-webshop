@@ -13,12 +13,11 @@ const dispatchUrlChangeEvent = () => {
   window.dispatchEvent(new Event(URL_CHANGE_EVENT));
 };
 
-interface UseQueryParamDataResult<T> {
+export interface IUseQueryParamDataResult<T = unknown> {
   data: T | undefined;
   isLoading: boolean;
   error: unknown;
-  setQueryParam: (key: string, value: string) => void;
-  removeQueryParam: (key: string) => void;
+  setQueryParam: (key: string, value?: string) => void;
   getQueryParam: (key: string) => string | null;
   getAllQueryParams: () => QueryParams;
 }
@@ -26,15 +25,20 @@ interface UseQueryParamDataResult<T> {
 export const useQueryParamData = <T>(
   queryKey: QueryKey,
   fetchFunction: FetchFunction<T>,
-): UseQueryParamDataResult<T> => {
+): IUseQueryParamDataResult<T> => {
   const queryClient = useQueryClient();
   const [searchParams, setSearchParams] = useState<URLSearchParams>(
     new URLSearchParams(window.location.search),
   );
 
   const updateURL = useCallback((newSearchParams: URLSearchParams) => {
-    const newUrl = `${window.location.pathname}?${newSearchParams.toString()}`;
-    window.history.pushState({}, "", newUrl);
+    const parsedSearchParams = newSearchParams.toString();
+    const newUrl = `${window.location.pathname}${parsedSearchParams ? `?${parsedSearchParams}` : ""}`;
+
+    // Only update the URL if it has changed
+    if (window.location.search !== parsedSearchParams) {
+      window.history.pushState({}, "", newUrl);
+    }
   }, []);
 
   const getAllQueryParams = useCallback((): QueryParams => {
@@ -75,18 +79,16 @@ export const useQueryParamData = <T>(
   }, []);
 
   const setQueryParam = useCallback(
-    (key: string, value: string): void => {
+    (key: string, value?: string): void => {
       const newSearchParams = new URLSearchParams(searchParams);
-      newSearchParams.set(key, value);
-      updateQueryParam(newSearchParams);
-    },
-    [searchParams, updateQueryParam],
-  );
 
-  const removeQueryParam = useCallback(
-    (key: string): void => {
-      const newSearchParams = new URLSearchParams(searchParams);
-      newSearchParams.delete(key);
+      if (value) {
+        newSearchParams.set(key, value);
+      } else {
+        newSearchParams.delete(key);
+      }
+
+      console.log("newSearchParams", newSearchParams);
       updateQueryParam(newSearchParams);
     },
     [searchParams, updateQueryParam],
@@ -109,7 +111,6 @@ export const useQueryParamData = <T>(
     isLoading,
     error,
     setQueryParam,
-    removeQueryParam,
     getQueryParam,
     getAllQueryParams,
   };

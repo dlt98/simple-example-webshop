@@ -16,7 +16,7 @@ export const fetchProducts = async (
 };
 
 function appendToUrl(baseUrl: string, query?: IProductQueryParams) {
-  if (!query) return baseUrl;
+  if (!query?.category) return baseUrl;
 
   return `${baseUrl}/category/${query.category}`;
 }

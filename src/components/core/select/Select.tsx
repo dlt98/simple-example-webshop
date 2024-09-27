@@ -2,10 +2,11 @@ import ReactSelect, { SingleValue } from "react-select";
 import { ISingleSelectItem } from "./types";
 
 interface IProps {
-  selectedItem: ISingleSelectItem;
+  selectedItem: ISingleSelectItem | null;
   options: ISingleSelectItem[];
   onChange: (newValue: SingleValue<ISingleSelectItem>) => void;
   isLoading?: boolean;
+  isClearable?: boolean;
 }
 
 export const Select = ({
@@ -13,14 +14,22 @@ export const Select = ({
   options,
   onChange,
   isLoading,
+  isClearable,
 }: IProps) => {
   return (
-    <ReactSelect
-      options={options}
-      onChange={onChange}
-      value={selectedItem}
-      isLoading={isLoading}
-      isSearchable
-    />
+    <div className="flex">
+      <ReactSelect
+        options={options}
+        onChange={onChange}
+        value={selectedItem}
+        isLoading={isLoading}
+        isSearchable
+      />
+      {!!isClearable && (
+        <button className="font-bold" onClick={() => onChange(null)}>
+          X
+        </button>
+      )}
+    </div>
   );
 };
