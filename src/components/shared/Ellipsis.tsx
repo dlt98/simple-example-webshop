@@ -51,7 +51,12 @@ export const Ellipsis = ({
         {generateContent()}
       </div>
       {shouldHaveEllipsis && (
-        <div tabIndex={0} role="button" onClick={(e) => e.stopPropagation()}>
+        <div
+          tabIndex={0}
+          role="button"
+          className="flex shrink-0"
+          onClick={(e) => e.stopPropagation()}
+        >
           <img src={InfoIcon} alt="information icon" className="size-3.5" />
         </div>
       )}
