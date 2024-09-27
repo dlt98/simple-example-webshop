@@ -7,6 +7,7 @@ interface IProps {
   onChange: (newValue: SingleValue<ISingleSelectItem>) => void;
   isLoading?: boolean;
   isClearable?: boolean;
+  placeholder?: string;
 }
 
 export const Select = ({
@@ -15,6 +16,7 @@ export const Select = ({
   onChange,
   isLoading,
   isClearable,
+  placeholder,
 }: IProps) => {
   return (
     <div className="flex">
@@ -24,6 +26,7 @@ export const Select = ({
         value={selectedItem}
         isLoading={isLoading}
         isSearchable
+        placeholder={placeholder}
       />
       {!!isClearable && (
         <button className="font-bold" onClick={() => onChange(null)}>

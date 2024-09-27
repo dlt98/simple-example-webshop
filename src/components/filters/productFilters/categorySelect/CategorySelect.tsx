@@ -43,6 +43,7 @@ const CategorySelect = ({ selectedQueryParam, setQueryParam }: IProps) => {
         selectedItem={selectedItem}
         isLoading={isFetching}
         isClearable
+        placeholder="Select a category"
       />
     </div>
   );
