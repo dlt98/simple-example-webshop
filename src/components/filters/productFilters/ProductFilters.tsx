@@ -1,29 +1,21 @@
-import { SingleValue } from "react-select";
-import { useGetCategoriesQuery } from "../../../hooks/queryHooks/categories";
-import { Select } from "../../core";
-import { ISingleSelectItem } from "../../core/select/types";
 import { useQueryParamData } from "../../../hooks";
 import { fetchAllCategories } from "../../../api/categories";
 import { CATEGORY_KEYS } from "../../../constants";
+import CategorySelect from "./categorySelect/CategorySelect";
+import { FILTER_QUERY_KEYS } from "./constants";
 
 export const ProductFilters = () => {
-  const { setQueryParam } = useQueryParamData(
+  const { setQueryParam, getQueryParam } = useQueryParamData(
     [CATEGORY_KEYS.allCategories],
     fetchAllCategories,
   );
-  const { parsedCategories, isFetching } = useGetCategoriesQuery();
-
-  if (isFetching) return <div>THIS IS FETCHING CATEGORIES</div>;
-
-  const onSelectChange = (newValue: SingleValue<ISingleSelectItem>) => {
-    if (!newValue?.value) return;
-
-    setQueryParam("category", newValue?.value);
-  };
 
   return (
     <div>
-      <Select options={parsedCategories} onChange={onSelectChange} />
+      <CategorySelect
+        selectedQueryParam={getQueryParam(FILTER_QUERY_KEYS.category)}
+        setQueryParam={setQueryParam}
+      />
     </div>
   );
 };
