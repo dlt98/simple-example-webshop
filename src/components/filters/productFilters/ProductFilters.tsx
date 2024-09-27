@@ -3,9 +3,7 @@ import CategorySelect from "./categorySelect/CategorySelect";
 import { FILTER_QUERY_KEYS } from "./constants";
 
 export const ProductFilters = () => {
-  const { setQueryParam, getQueryParam, data } = useGetProductsQuery();
-
-  console.log("UPDATE data", data);
+  const { setQueryParam, getQueryParam } = useGetProductsQuery();
 
   return (
     <div>

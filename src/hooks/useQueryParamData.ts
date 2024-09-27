@@ -26,14 +26,11 @@ interface UseQueryParamDataResult<T> {
 export const useQueryParamData = <T>(
   queryKey: QueryKey,
   fetchFunction: FetchFunction<T>,
-  isInApp?: boolean,
 ): UseQueryParamDataResult<T> => {
   const queryClient = useQueryClient();
   const [searchParams, setSearchParams] = useState<URLSearchParams>(
     new URLSearchParams(window.location.search),
   );
-
-  console.log("searchParams", searchParams);
 
   const updateURL = useCallback((newSearchParams: URLSearchParams) => {
     const newUrl = `${window.location.pathname}?${newSearchParams.toString()}`;
@@ -106,8 +103,6 @@ export const useQueryParamData = <T>(
     queryKey: getUpdatedQueryKey(),
     queryFn: () => fetchFunction(getAllQueryParams()),
   });
-
-  if (isInApp) console.log("INAPP data", data);
 
   return {
     data,
