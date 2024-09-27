@@ -1,9 +1,17 @@
 import { useQuery, useQueryClient, QueryKey } from "@tanstack/react-query";
 import { useState, useEffect, useCallback } from "react";
 
-type QueryParams = Record<string, string>;
+export type QueryParams = Record<string, string>;
 
 type FetchFunction<T> = (params: QueryParams) => Promise<T>;
+
+// Create a custom event for URL changes
+const URL_CHANGE_EVENT = "custom-url-change";
+
+// Function to dispatch the custom event
+const dispatchUrlChangeEvent = () => {
+  window.dispatchEvent(new Event(URL_CHANGE_EVENT));
+};
 
 interface UseQueryParamDataResult<T> {
   data: T | undefined;
@@ -18,33 +26,55 @@ interface UseQueryParamDataResult<T> {
 export const useQueryParamData = <T>(
   queryKey: QueryKey,
   fetchFunction: FetchFunction<T>,
+  isInApp?: boolean,
 ): UseQueryParamDataResult<T> => {
   const queryClient = useQueryClient();
   const [searchParams, setSearchParams] = useState<URLSearchParams>(
     new URLSearchParams(window.location.search),
   );
 
+  console.log("searchParams", searchParams);
+
   const updateURL = useCallback((newSearchParams: URLSearchParams) => {
     const newUrl = `${window.location.pathname}?${newSearchParams.toString()}`;
     window.history.pushState({}, "", newUrl);
   }, []);
 
+  const getAllQueryParams = useCallback((): QueryParams => {
+    return Object.fromEntries(searchParams.entries());
+  }, [searchParams]);
+
+  const getUpdatedQueryKey = useCallback(
+    () => [...queryKey, getAllQueryParams()],
+    [getAllQueryParams, queryKey],
+  );
+
   const updateQueryParam = useCallback(
     (newSearchParams: URLSearchParams) => {
       setSearchParams(newSearchParams);
       updateURL(newSearchParams);
-      queryClient.invalidateQueries({ queryKey });
+      dispatchUrlChangeEvent();
+
+      queryClient.invalidateQueries({
+        queryKey: getUpdatedQueryKey(),
+      });
     },
-    [queryClient, queryKey, updateURL],
+
+    [getUpdatedQueryKey, queryClient, updateURL],
   );
 
   useEffect(() => {
-    const handlePopState = () => {
+    const handleUrlChange = () => {
       setSearchParams(new URLSearchParams(window.location.search));
     };
 
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
+    window.addEventListener("popstate", handleUrlChange);
+    window.addEventListener(URL_CHANGE_EVENT, handleUrlChange);
+
+    return () => {
+      window.removeEventListener("popstate", handleUrlChange);
+      window.removeEventListener(URL_CHANGE_EVENT, handleUrlChange);
+    };
   }, []);
 
   const setQueryParam = useCallback(
@@ -72,14 +102,12 @@ export const useQueryParamData = <T>(
     [searchParams],
   );
 
-  const getAllQueryParams = useCallback((): QueryParams => {
-    return Object.fromEntries(searchParams.entries());
-  }, [searchParams]);
-
   const { data, isLoading, error } = useQuery<T, unknown>({
-    queryKey,
+    queryKey: getUpdatedQueryKey(),
     queryFn: () => fetchFunction(getAllQueryParams()),
   });
+
+  if (isInApp) console.log("INAPP data", data);
 
   return {
     data,

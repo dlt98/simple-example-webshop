@@ -4,13 +4,22 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "./components/layout/Layout";
 import { ProductFilters } from "./components/filters";
-import { useGetProductsQuery } from "./hooks/queryHooks/products/useGetProductsQuery";
+import { useQueryParamData } from "./hooks";
+import { PRODUCT_KEYS } from "./constants";
+import { fetchProducts } from "./api/products/productsApi";
 
 function App() {
-  const { data, isFetching } = useGetProductsQuery();
+  const { data, isLoading } = useQueryParamData(
+    [PRODUCT_KEYS.products],
+    fetchProducts,
+    true,
+  );
 
-  if (isFetching) return <div>THIS IS FETCHING</div>;
+  console.log("isLoading", isLoading);
 
+  if (isLoading) return <div>THIS IS FETCHING</div>;
+
+  console.log("data", data);
   return (
     <Layout>
       <ProductFilters />
