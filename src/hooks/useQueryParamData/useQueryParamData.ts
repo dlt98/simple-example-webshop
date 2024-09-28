@@ -1,49 +1,17 @@
 import { useQuery, useQueryClient, QueryKey } from "@tanstack/react-query";
 import { useState, useEffect, useCallback } from "react";
-
-export type QueryParams = Record<string, string>;
-
-type FetchFunction<T> = (params: QueryParams | null) => Promise<T>;
-
-// Create a custom event for URL changes
-const URL_CHANGE_EVENT = "custom-url-change";
-
-// Function to dispatch the custom event
-const dispatchUrlChangeEvent = () => {
-  window.dispatchEvent(new Event(URL_CHANGE_EVENT));
-};
-
-interface IQueryParamItem {
-  key: string;
-  value?: string;
-}
-export interface IUseQueryParamDataResult<T = unknown> {
-  data: T | undefined;
-  isLoading: boolean;
-  error: unknown;
-  setQueryParam: (items: IQueryParamItem | IQueryParamItem[]) => void;
-  getQueryParam: (key: string) => string | null;
-  getAllQueryParams: () => QueryParams | null;
-}
+import { URL_CHANGE_EVENT } from "./constants";
+import { dispatchUrlChangeEvent, updateURL } from "./utils";
+import { FetchFunction, IQueryParamItem, QueryParams } from "./types";
 
 export const useQueryParamData = <T>(
   queryKey: QueryKey,
   fetchFunction: FetchFunction<T>,
-): IUseQueryParamDataResult<T> => {
+) => {
   const queryClient = useQueryClient();
   const [searchParams, setSearchParams] = useState<URLSearchParams>(
     new URLSearchParams(window.location.search),
   );
-
-  const updateURL = useCallback((newSearchParams: URLSearchParams) => {
-    const parsedSearchParams = newSearchParams.toString();
-    const newUrl = `${window.location.pathname}${parsedSearchParams ? `?${parsedSearchParams}` : ""}`;
-
-    // Only update the URL if it has changed
-    if (window.location.search !== parsedSearchParams) {
-      window.history.pushState({}, "", newUrl);
-    }
-  }, []);
 
   const getAllQueryParams = useCallback((): QueryParams | null => {
     if (!searchParams.size) return null;
@@ -67,7 +35,7 @@ export const useQueryParamData = <T>(
       });
     },
 
-    [getUpdatedQueryKey, queryClient, updateURL],
+    [getUpdatedQueryKey, queryClient],
   );
 
   useEffect(() => {
@@ -122,5 +90,6 @@ export const useQueryParamData = <T>(
     setQueryParam,
     getQueryParam,
     getAllQueryParams,
+    searchParams,
   };
 };
