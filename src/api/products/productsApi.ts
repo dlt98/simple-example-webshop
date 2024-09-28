@@ -1,13 +1,16 @@
 import { PRODUCT_ROUTES } from ".";
+import { FILTER_QUERY_KEYS } from "../../components/filters/productFilters/constants";
 import { IProductQueryParams, QueryParams } from "../../hooks";
 import { IProductFetchRes } from "../../types";
 
 export const fetchProducts = async (
-  query: QueryParams,
+  query: QueryParams | null,
 ): Promise<IProductFetchRes> => {
-  const response = await fetch(
-    appendToUrl(PRODUCT_ROUTES.products, query as IProductQueryParams),
-  );
+  const url = query
+    ? appendToUrl(PRODUCT_ROUTES.products, query as any as IProductQueryParams)
+    : PRODUCT_ROUTES.products;
+
+  const response = await fetch(url);
 
   if (!response.ok) {
     throw new Error("Network response was not ok");
@@ -15,8 +18,18 @@ export const fetchProducts = async (
   return response.json();
 };
 
-function appendToUrl(baseUrl: string, query?: IProductQueryParams) {
-  if (!query?.category) return baseUrl;
+function appendToUrl(baseUrl: string, query: IProductQueryParams) {
+  const searchParams = new URLSearchParams(window.location.search);
 
-  return `${baseUrl}/category/${query.category}`;
+  if (query.category) {
+    baseUrl = `${baseUrl}/category/${query.category}`;
+
+    searchParams.delete(FILTER_QUERY_KEYS.category);
+  }
+
+  const newQueryString = searchParams.toString();
+
+  const res = `${baseUrl}${newQueryString ? `?${newQueryString}` : ""}`;
+
+  return res;
 }

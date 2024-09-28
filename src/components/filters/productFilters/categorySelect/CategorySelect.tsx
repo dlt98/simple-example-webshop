@@ -32,7 +32,7 @@ const CategorySelect = ({ selectedQueryParam, setQueryParam }: IProps) => {
   const onSelectChange = (newValue: SingleValue<ISingleSelectItem>) => {
     setSelectedItem(newValue);
 
-    setQueryParam(FILTER_QUERY_KEYS.category, newValue?.value);
+    setQueryParam({ key: FILTER_QUERY_KEYS.category, value: newValue?.value });
   };
 
   return (

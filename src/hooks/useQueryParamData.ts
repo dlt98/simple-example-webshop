@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 
 export type QueryParams = Record<string, string>;
 
-type FetchFunction<T> = (params: QueryParams) => Promise<T>;
+type FetchFunction<T> = (params: QueryParams | null) => Promise<T>;
 
 // Create a custom event for URL changes
 const URL_CHANGE_EVENT = "custom-url-change";
@@ -13,13 +13,17 @@ const dispatchUrlChangeEvent = () => {
   window.dispatchEvent(new Event(URL_CHANGE_EVENT));
 };
 
+interface IQueryParamItem {
+  key: string;
+  value?: string;
+}
 export interface IUseQueryParamDataResult<T = unknown> {
   data: T | undefined;
   isLoading: boolean;
   error: unknown;
-  setQueryParam: (key: string, value?: string) => void;
+  setQueryParam: (items: IQueryParamItem | IQueryParamItem[]) => void;
   getQueryParam: (key: string) => string | null;
-  getAllQueryParams: () => QueryParams;
+  getAllQueryParams: () => QueryParams | null;
 }
 
 export const useQueryParamData = <T>(
@@ -41,7 +45,9 @@ export const useQueryParamData = <T>(
     }
   }, []);
 
-  const getAllQueryParams = useCallback((): QueryParams => {
+  const getAllQueryParams = useCallback((): QueryParams | null => {
+    if (!searchParams.size) return null;
+
     return Object.fromEntries(searchParams.entries());
   }, [searchParams]);
 
@@ -79,16 +85,19 @@ export const useQueryParamData = <T>(
   }, []);
 
   const setQueryParam = useCallback(
-    (key: string, value?: string): void => {
+    (items: IQueryParamItem | IQueryParamItem[]): void => {
       const newSearchParams = new URLSearchParams(searchParams);
 
-      if (value) {
-        newSearchParams.set(key, value);
-      } else {
-        newSearchParams.delete(key);
-      }
+      const copied = Array.isArray(items) ? [...items] : [items];
 
-      console.log("newSearchParams", newSearchParams);
+      copied.forEach(({ key, value }) => {
+        if (value) {
+          newSearchParams.set(key, value);
+        } else {
+          newSearchParams.delete(key);
+        }
+      });
+
       updateQueryParam(newSearchParams);
     },
     [searchParams, updateQueryParam],
