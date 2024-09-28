@@ -3,14 +3,11 @@ import { Select, ISingleSelectItem } from "../../../core";
 import { FILTER_QUERY_KEYS } from "../constants";
 import { useEffect, useState } from "react";
 import { findCategoryItem } from "./utils";
-import {
-  IUseQueryParamDataResult,
-  useGetCategoriesQuery,
-} from "../../../../hooks";
+import { ISetQueryParamFunc, useGetCategoriesQuery } from "../../../../hooks";
 
 interface IProps {
   selectedQueryParam: string | null;
-  setQueryParam: IUseQueryParamDataResult["setQueryParam"];
+  setQueryParam: ISetQueryParamFunc;
 }
 
 const CategorySelect = ({ selectedQueryParam, setQueryParam }: IProps) => {
@@ -38,12 +35,14 @@ const CategorySelect = ({ selectedQueryParam, setQueryParam }: IProps) => {
   return (
     <div>
       <Select
+        id="category select"
         options={parsedCategories}
         onChange={onSelectChange}
         selectedItem={selectedItem}
         isLoading={isFetching}
-        isClearable
+        isClearable={!!selectedItem}
         placeholder="Select a category"
+        label="Select a category"
       />
     </div>
   );

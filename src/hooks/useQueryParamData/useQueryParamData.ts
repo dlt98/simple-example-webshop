@@ -2,7 +2,12 @@ import { useQuery, useQueryClient, QueryKey } from "@tanstack/react-query";
 import { useState, useEffect, useCallback } from "react";
 import { URL_CHANGE_EVENT } from "./constants";
 import { dispatchUrlChangeEvent, updateURL } from "./utils";
-import { FetchFunction, IQueryParamItem, QueryParams } from "./types";
+import {
+  FetchFunction,
+  IQueryParamItem,
+  ISetQueryParamFunc,
+  QueryParams,
+} from "./types";
 
 export const useQueryParamData = <T>(
   queryKey: QueryKey,
@@ -52,7 +57,7 @@ export const useQueryParamData = <T>(
     };
   }, []);
 
-  const setQueryParam = useCallback(
+  const setQueryParam: ISetQueryParamFunc = useCallback(
     (items: IQueryParamItem | IQueryParamItem[]): void => {
       const newSearchParams = new URLSearchParams(searchParams);
 

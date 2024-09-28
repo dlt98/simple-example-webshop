@@ -1,4 +1,4 @@
-import { IQueryParamItem } from "../../../../hooks";
+import { ISetQueryParamFunc } from "../../../../hooks";
 import { useEffect, useState } from "react";
 import { SORT_OPTIONS } from "./constants";
 import { SingleValue } from "react-select";
@@ -7,7 +7,7 @@ import { generateSortQuery } from "./utils";
 
 interface IProps {
   selectedQueryParam: string | null;
-  setQueryParam: (items: IQueryParamItem | IQueryParamItem[]) => void;
+  setQueryParam: ISetQueryParamFunc;
   sortKey: string;
   placeholder: string;
   shouldReset?: boolean; // Used for resetting dropdown option when other sort is selected
@@ -36,10 +36,13 @@ export const OrderSelect = ({
 
   return (
     <Select
+      id={sortKey}
       options={SORT_OPTIONS}
       onChange={onSelectChange}
       selectedItem={selectedItem}
       placeholder={placeholder}
+      label={placeholder}
+      isClearable={!!selectedItem}
     />
   );
 };

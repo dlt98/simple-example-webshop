@@ -6,3 +6,7 @@ export interface IQueryParamItem {
   key: string;
   value?: string;
 }
+
+export type ISetQueryParamFunc = (
+  items: IQueryParamItem | IQueryParamItem[],
+) => void;

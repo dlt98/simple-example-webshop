@@ -4,29 +4,42 @@ import { FILTER_QUERY_KEYS } from "./constants";
 import { OrderSelect } from "./orderSelect";
 
 export const ProductFilters = () => {
-  const { setQueryParam, getQueryParam, searchParams } = useGetProductsQuery();
+  const { setQueryParam, getQueryParam } = useGetProductsQuery();
 
   const shouldResetCheck = (key: string) => {
-    const sortByKey = searchParams.get("sortBy");
+    const sortByKey = getQueryParam("sortBy");
 
     return sortByKey !== key;
   };
 
+  const getSelectedQueryParam = (filterKey: string) => {
+    const sortByKey = getQueryParam("sortBy");
+
+    if (filterKey !== sortByKey) return null;
+
+    const orderKey = getQueryParam("order");
+    return orderKey;
+  };
+
   return (
-    <div>
+    <div className="flex gap-4">
       <CategorySelect
         selectedQueryParam={getQueryParam(FILTER_QUERY_KEYS.category)}
         setQueryParam={setQueryParam}
       />
       <OrderSelect
-        selectedQueryParam={getQueryParam(FILTER_QUERY_KEYS.sortBy.title)}
+        selectedQueryParam={getSelectedQueryParam(
+          FILTER_QUERY_KEYS.sortBy.title,
+        )}
         setQueryParam={setQueryParam}
         sortKey={FILTER_QUERY_KEYS.sortBy.title}
         placeholder="Sort by name"
         shouldReset={shouldResetCheck(FILTER_QUERY_KEYS.sortBy.title)}
       />
       <OrderSelect
-        selectedQueryParam={getQueryParam(FILTER_QUERY_KEYS.sortBy.price)}
+        selectedQueryParam={getSelectedQueryParam(
+          FILTER_QUERY_KEYS.sortBy.price,
+        )}
         setQueryParam={setQueryParam}
         sortKey={FILTER_QUERY_KEYS.sortBy.price}
         placeholder="Sort by price"
