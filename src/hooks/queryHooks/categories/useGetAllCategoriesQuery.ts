@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { fetchAllCategories } from "../../../api/categories";
-import { CATEGORY_KEYS } from "../../../constants";
+import { fetchAllCategories } from "@/api";
+import { CATEGORY_KEYS } from "@/constants";
 import { useQuery } from "@tanstack/react-query";
-import { parseCategoriesToSelect } from "../../../utils";
+import { parseCategoriesToSelect } from "@/utils";
 
 export const useGetCategoriesQuery = () => {
   const queryData = useQuery({

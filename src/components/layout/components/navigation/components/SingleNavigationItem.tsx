@@ -1,6 +1,6 @@
 import { ISingleMenuItem } from "../types";
 
-const SingleNavigationItem = ({ link, title }: ISingleMenuItem) => {
+export const SingleNavigationItem = ({ link, title }: ISingleMenuItem) => {
   return (
     <li>
       <a
@@ -12,5 +12,3 @@ const SingleNavigationItem = ({ link, title }: ISingleMenuItem) => {
     </li>
   );
 };
-
-export default SingleNavigationItem;

@@ -1,9 +1,9 @@
 import { ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
-import closeIcon from "../../../../assets/icons/png/close-icon.png";
-import { Button, BUTTON_VARIANT } from "../../../core";
-import { SidebarCanvasHeader } from "./SidebarCanvasHeader";
+import closeIcon from "@/assets/icons/png/close-icon.png";
+import { Button, BUTTON_VARIANT } from "@/components/core";
 import { ESidebarPosition, SIDEBAR_POSITIONING_CLASS } from "../constants";
+import { SidebarCanvasHeader } from ".";
 
 interface SheetContentProps {
   children: ReactNode;

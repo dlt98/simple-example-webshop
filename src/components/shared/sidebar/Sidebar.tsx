@@ -1,8 +1,7 @@
+import { Button, BUTTON_VARIANT } from "@/components/core";
+import { useBodyScroll } from "@/hooks";
 import { ReactNode, useEffect, useState } from "react";
-import { Button, BUTTON_VARIANT } from "../../core";
-import { SidebarCanvas } from "./components/SidebarCanvas";
-import { BackdropBlur } from "./components/BackdropBlur";
-import { useBodyScroll } from "../../../hooks";
+import { BackdropBlur, SidebarCanvas } from "./components";
 import { ESidebarPosition } from "./constants";
 
 interface IProps {
@@ -16,7 +15,7 @@ interface IProps {
   shouldClose?: boolean; // Used for external closing of the sidebar
 }
 
-const Sidebar = ({
+export const Sidebar = ({
   title,
   children,
   triggerButton,
@@ -57,5 +56,3 @@ const Sidebar = ({
     </BackdropBlur>
   );
 };
-
-export default Sidebar;

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { disableScrollOnBody } from "../utils";
+import { disableScrollOnBody } from "@/utils";
 
 export const useBodyScroll = (isOpen: boolean) => {
   useEffect(() => {

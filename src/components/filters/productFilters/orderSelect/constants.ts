@@ -1,4 +1,4 @@
-import { ISingleSelectItem } from "../../../core";
+import { ISingleSelectItem } from "@/components/core";
 
 export const SORT_OPTIONS: ISingleSelectItem[] = [
   { label: "Ascending", value: "asc" },

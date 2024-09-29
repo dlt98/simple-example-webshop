@@ -1,6 +1,6 @@
-import { CART_KEYS } from "../../constants";
-import { ICartLocalStorage, ICartSingleProduct } from "../../models";
-import { IProduct, IProductFetchRes } from "../../types";
+import { CART_KEYS } from "@/constants";
+import { ICartLocalStorage, ICartSingleProduct } from "@/models";
+import { IProduct, IProductFetchRes } from "@/types";
 import { DEFAULT_CART } from "./constants";
 
 export const getCartFromStorage = (): ICartLocalStorage => {

@@ -1,8 +1,8 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Layout from "./components/layout/Layout";
-import { ProductFilters } from "./components/filters";
-import { ProductDisplay } from "./components/productDisplay";
+import { ProductFilters } from "@/components/filters";
+import { ProductDisplay } from "@/components/productDisplay";
+import { Layout } from "@/components/layout";
 
 function App() {
   return (

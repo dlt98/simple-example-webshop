@@ -1,7 +1,7 @@
 import ReactSelect, { SingleValue } from "react-select";
 import { ISingleSelectItem } from "./types";
+import closeIcon from "@/assets/icons/png/close-icon.png";
 import { Button, BUTTON_VARIANT } from "../button";
-import closeIcon from "../../../assets/icons/png/close-icon.png";
 
 interface IProps {
   id: string;

@@ -1,4 +1,4 @@
-import AddToCartButton from "../shared/AddToCartButton";
+import { AddToCartButton } from "@/components/shared";
 import {
   ProductCardDescription,
   ProductImage,
@@ -18,7 +18,7 @@ interface IProps {
 // Design inspired by
 // https://cdn.dribbble.com/users/114038/screenshots/3674970/product_card_design_2x.png
 
-const ProductCard = ({
+export const ProductCard = ({
   id,
   description,
   image,
@@ -39,5 +39,3 @@ const ProductCard = ({
     </article>
   );
 };
-
-export default ProductCard;

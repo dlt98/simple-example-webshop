@@ -1,8 +1,7 @@
 import { NAVIGATION_ITEMS } from "../constants";
-import SingleNavigationItem from "./SingleNavigationItem";
-import { MobileMenuSidebar } from "./MobileMenuSidebar";
+import { MobileMenuSidebar, SingleNavigationItem } from ".";
 
-const NavigationItems = () => {
+export const NavigationItems = () => {
   const navigationItems = (
     <ul className="flex flex-col justify-center gap-3 md:flex-row md:gap-4">
       {NAVIGATION_ITEMS.map((item) => (
@@ -18,5 +17,3 @@ const NavigationItems = () => {
     </nav>
   );
 };
-
-export default NavigationItems;

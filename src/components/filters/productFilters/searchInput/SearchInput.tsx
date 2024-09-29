@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
-import { Input } from "../../../core";
-import { useDebounce, useGetProductsQuery } from "../../../../hooks";
-import { FILTER_QUERY_KEYS } from "../constants";
+import { Input } from "@/components/core";
+import { useDebounce, useGetProductsQuery } from "@/hooks";
+import { FILTER_QUERY_KEYS } from "@/constants";
 
 const SEARCH_DELAY = 500;
 

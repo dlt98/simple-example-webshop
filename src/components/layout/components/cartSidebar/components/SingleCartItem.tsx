@@ -1,6 +1,6 @@
-import { IUpsertCartMutationData } from "../../../../hooks";
-import { ICartSingleProduct } from "../../../../models";
-import { formatDecimals } from "../../../../utils";
+import { IUpsertCartMutationData } from "@/hooks";
+import { ICartSingleProduct } from "@/models";
+import { formatDecimals } from "@/utils";
 
 interface IProps extends ICartSingleProduct {
   onQuantityChange: (productQuantity: IUpsertCartMutationData) => void;
