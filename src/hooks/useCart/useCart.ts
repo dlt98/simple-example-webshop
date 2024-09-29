@@ -1,17 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { IProductFetchRes } from "../../types";
-import { CART_KEYS, PRODUCT_KEYS } from "../../constants";
+import { IProductFetchRes } from "@/types";
+import { CART_KEYS, PRODUCT_KEYS } from "@/constants";
 import {
   findSpecificProduct,
   getCartFromStorage,
   setCartToStorage,
   setProductAmount,
 } from "./utils";
-import { ICartLocalStorage, ICartSingleProduct } from "../../models";
+import { ICartLocalStorage, ICartSingleProduct } from "@/models";
 import { DEFAULT_CART } from "./constants";
 import { toast } from "react-toastify";
 import { IUpsertCartMutationData } from "./types";
-import { formatDecimals } from "../../utils";
+import { formatDecimals } from "@/utils";
 
 export const useCart = () => {
   const queryClient = useQueryClient();

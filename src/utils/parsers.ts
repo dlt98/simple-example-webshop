@@ -1,5 +1,5 @@
-import { ISingleSelectItem } from "../components/core/select/types";
-import { IAllCAtegoriesRes } from "../types";
+import { ISingleSelectItem } from "@/components/core";
+import { IAllCAtegoriesRes } from "@/types";
 
 export const parseCategoriesToSelect = (
   categories?: IAllCAtegoriesRes,

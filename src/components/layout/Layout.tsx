@@ -1,12 +1,11 @@
 import { ReactNode } from "react";
-import { Footer } from "./footer";
-import { Navigation } from "./navigation";
-import { ScrollToTop } from "./ScrollToTopButton";
+import { Footer, Navigation, ScrollToTop } from "./components";
 
 interface IProps {
   children: ReactNode;
 }
-const Layout = ({ children }: IProps) => {
+
+export const Layout = ({ children }: IProps) => {
   return (
     <>
       <Navigation />
@@ -19,5 +18,3 @@ const Layout = ({ children }: IProps) => {
     </>
   );
 };
-
-export default Layout;
