@@ -1,10 +1,10 @@
 import { useCallback, useRef } from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function useDebounce<T extends (...args: any[]) => void>(
+export const useDebounce = <T extends (...args: any[]) => void>(
   callback: T,
   delay: number,
-) {
+) => {
   const timer = useRef<number | null>(null);
 
   const debouncedCallback = useCallback(
@@ -20,6 +20,4 @@ function useDebounce<T extends (...args: any[]) => void>(
   );
 
   return debouncedCallback;
-}
-
-export default useDebounce;
+};
