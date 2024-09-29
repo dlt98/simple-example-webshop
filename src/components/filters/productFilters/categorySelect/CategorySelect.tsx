@@ -1,17 +1,16 @@
 import { SingleValue } from "react-select";
 import { Select, ISingleSelectItem } from "../../../core";
 import { FILTER_QUERY_KEYS } from "../constants";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { findCategoryItem } from "./utils";
-import { ISetQueryParamFunc, useGetCategoriesQuery } from "../../../../hooks";
+import { useGetCategoriesQuery, useGetProductsQuery } from "../../../../hooks";
 
-interface IProps {
-  selectedQueryParam: string | null;
-  setQueryParam: ISetQueryParamFunc;
-}
-
-const CategorySelect = ({ selectedQueryParam, setQueryParam }: IProps) => {
+const CategorySelect = () => {
   const { parsedCategories, isFetching } = useGetCategoriesQuery();
+  const { setQueryParam, getQueryParam, searchParams } = useGetProductsQuery();
+  const { current: selectedQueryParam } = useRef(
+    getQueryParam(FILTER_QUERY_KEYS.category),
+  );
 
   const [selectedItem, setSelectedItem] = useState<ISingleSelectItem | null>(
     findCategoryItem(parsedCategories, selectedQueryParam),
@@ -29,8 +28,23 @@ const CategorySelect = ({ selectedQueryParam, setQueryParam }: IProps) => {
   const onSelectChange = (newValue: SingleValue<ISingleSelectItem>) => {
     setSelectedItem(newValue);
 
-    setQueryParam({ key: FILTER_QUERY_KEYS.category, value: newValue?.value });
+    setQueryParam([
+      { key: FILTER_QUERY_KEYS.category, value: newValue?.value },
+      { key: FILTER_QUERY_KEYS.search },
+    ]);
   };
+
+  const resetCategory = () => {
+    setSelectedItem(null);
+    setQueryParam([{ key: FILTER_QUERY_KEYS.category }]);
+  };
+
+  useEffect(() => {
+    // Search and category can't be run at the same time. So resetting them is needed
+    if (selectedItem && getQueryParam(FILTER_QUERY_KEYS.search)) {
+      resetCategory();
+    }
+  }, [searchParams]);
 
   return (
     <div>

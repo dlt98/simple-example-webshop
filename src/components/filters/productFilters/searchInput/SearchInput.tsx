@@ -13,18 +13,22 @@ export const SearchInput = () => {
     (term: string) => {
       setQueryParam([
         { key: FILTER_QUERY_KEYS.search, value: term },
-        { key: FILTER_QUERY_KEYS.category, value: undefined },
+        { key: FILTER_QUERY_KEYS.category },
       ]);
     },
     [setQueryParam],
   );
 
+  const resetSearch = () => {
+    setSearchTerm("");
+    setQueryParam([{ key: FILTER_QUERY_KEYS.search }]);
+  };
+
   useEffect(() => {
     // Unable to search and have a selected category at the same time
     // https://dummyjson.com/docs/products#products-category
     if (!!searchTerm && getQueryParam(FILTER_QUERY_KEYS.category)) {
-      setSearchTerm("");
-      handleSearch("");
+      resetSearch();
     }
   }, [searchParams]);
 

@@ -25,10 +25,7 @@ export const ProductFilters = () => {
   return (
     <div className="flex gap-4">
       <SearchInput />
-      <CategorySelect
-        selectedQueryParam={getQueryParam(FILTER_QUERY_KEYS.category)}
-        setQueryParam={setQueryParam}
-      />
+      <CategorySelect />
       <OrderSelect
         selectedQueryParam={getSelectedQueryParam(
           FILTER_QUERY_KEYS.sortBy.title,

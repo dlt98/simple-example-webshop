@@ -21,6 +21,7 @@ export const fetchProducts = async (
 function appendToUrl(baseUrl: string, query: IProductQueryParams) {
   const searchParams = new URLSearchParams(window.location.search);
 
+  console.log("query", query);
   if (query.category) {
     baseUrl = `${baseUrl}/category/${query.category}`;
 
