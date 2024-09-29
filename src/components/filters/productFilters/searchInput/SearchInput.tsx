@@ -6,8 +6,10 @@ import { FILTER_QUERY_KEYS } from "../constants";
 const SEARCH_DELAY = 500;
 
 export const SearchInput = () => {
-  const [searchTerm, setSearchTerm] = useState("");
   const { setQueryParam, getQueryParam, searchParams } = useGetProductsQuery();
+  const [searchTerm, setSearchTerm] = useState(
+    getQueryParam(FILTER_QUERY_KEYS.search) || "",
+  );
 
   const handleSearch = useCallback(
     (term: string) => {
