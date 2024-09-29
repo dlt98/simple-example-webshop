@@ -25,7 +25,7 @@ export const Modal = ({
   title,
   children,
   footer,
-  maxWidth = "max-w-md",
+  maxWidth = "max-w-2xl",
   closeOnOverlayClick = true,
   showCloseButton = true,
   overlayColor = "bg-black bg-opacity-50",
@@ -60,7 +60,14 @@ export const Modal = ({
           showCloseButton={showCloseButton}
           titleClassName={titleClassName}
         />
-        <div className={twMerge("px-6 py-4", bodyClassName)}>{children}</div>
+        <div
+          className={twMerge(
+            "max-h-[90dvh] overflow-auto px-6 py-4",
+            bodyClassName,
+          )}
+        >
+          {children}
+        </div>
         {footer && (
           <div className={twMerge("border-t px-6 py-4", footerClassName)}>
             {footer}
