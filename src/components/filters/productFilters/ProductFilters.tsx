@@ -2,6 +2,7 @@ import { useGetProductsQuery } from "../../../hooks";
 import CategorySelect from "./categorySelect/CategorySelect";
 import { FILTER_QUERY_KEYS } from "./constants";
 import { OrderSelect } from "./orderSelect";
+import { SearchInput } from "./searchInput";
 
 export const ProductFilters = () => {
   const { setQueryParam, getQueryParam } = useGetProductsQuery();
@@ -23,6 +24,7 @@ export const ProductFilters = () => {
 
   return (
     <div className="flex gap-4">
+      <SearchInput />
       <CategorySelect
         selectedQueryParam={getQueryParam(FILTER_QUERY_KEYS.category)}
         setQueryParam={setQueryParam}
