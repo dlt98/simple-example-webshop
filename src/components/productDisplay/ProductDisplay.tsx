@@ -5,13 +5,16 @@ import { useState } from "react";
 
 export const ProductDisplay = () => {
   const [productId, setProductId] = useState<number | null>(null);
-  const { data, isLoading } = useGetProductsQuery();
+  const { data, isLoading, handleNextPage, handlePreviousPage } =
+    useGetProductsQuery();
 
   const onModalClose = () => {
     setProductId(null);
   };
 
   if (isLoading) return <div>THIS IS FETCHING</div>;
+
+  console.log("data", data);
 
   return (
     <div className="grid grid-cols-1 gap-6 xs:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
@@ -31,6 +34,8 @@ export const ProductDisplay = () => {
           );
         },
       )}
+      <button onClick={handleNextPage}>NEXT</button>
+      <button onClick={handlePreviousPage}>PREV</button>
       <SingleProductModal productId={productId} onModalClose={onModalClose} />
     </div>
   );
