@@ -96,5 +96,6 @@ export const useQueryParamData = <T>(
     getQueryParam,
     getAllQueryParams,
     searchParams,
+    getUpdatedQueryKey,
   };
 };

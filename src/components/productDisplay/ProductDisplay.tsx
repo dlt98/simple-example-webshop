@@ -2,12 +2,19 @@ import { fetchProducts } from "@/api/products/productsApi";
 import { PRODUCT_KEYS } from "@/constants";
 import { useQueryParamData } from "@/hooks";
 import { ProductCard } from "../productCard";
+import { SingleProductModal } from "../shared/modal/singleProductModal/SingleProductModal";
+import { useState } from "react";
 
 export const ProductDisplay = () => {
+  const [productId, setProductId] = useState<number | null>(null);
   const { data, isLoading } = useQueryParamData(
     [PRODUCT_KEYS.products],
     fetchProducts,
   );
+
+  const onModalClose = () => {
+    setProductId(null);
+  };
 
   if (isLoading) return <div>THIS IS FETCHING</div>;
 
@@ -23,12 +30,13 @@ export const ProductDisplay = () => {
               price={price}
               discountPercentage={discountPercentage}
               image={thumbnail}
-              onClick={() => alert("Open modal")}
+              onClick={() => setProductId(id)}
               key={id}
             />
           );
         },
       )}
+      <SingleProductModal productId={productId} onModalClose={onModalClose} />
     </div>
   );
 };

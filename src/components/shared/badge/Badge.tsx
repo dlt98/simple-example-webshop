@@ -9,7 +9,7 @@ interface IProps {
   className?: string;
 }
 
-const Badge = ({
+export const Badge = ({
   text,
   variant = EBadgeVariant.clear,
   children,
@@ -27,4 +27,3 @@ const Badge = ({
     </div>
   );
 };
-export default Badge;

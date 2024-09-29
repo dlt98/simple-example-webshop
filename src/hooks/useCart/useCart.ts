@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { IProductFetchRes } from "@/types";
-import { CART_KEYS, PRODUCT_KEYS } from "@/constants";
+import { CART_KEYS } from "@/constants";
 import {
   findSpecificProduct,
   getCartFromStorage,
@@ -12,9 +12,11 @@ import { DEFAULT_CART } from "./constants";
 import { toast } from "react-toastify";
 import { IUpsertCartMutationData } from "./types";
 import { formatDecimals } from "@/utils";
+import { useGetProductsQuery } from "../queryHooks";
 
 export const useCart = () => {
   const queryClient = useQueryClient();
+  const { getUpdatedQueryKey } = useGetProductsQuery();
 
   const { data: cart = DEFAULT_CART, refetch } = useQuery<ICartLocalStorage>({
     queryKey: [CART_KEYS.cart],
@@ -30,9 +32,8 @@ export const useCart = () => {
 
   const upsertCartMutation = useMutation({
     mutationFn: ({ productId, amount = 1 }: IUpsertCartMutationData) => {
-      const allProducts = queryClient.getQueryData<IProductFetchRes>([
-        PRODUCT_KEYS.products,
-      ]);
+      const allProducts =
+        queryClient.getQueryData<IProductFetchRes>(getUpdatedQueryKey());
 
       const productData = findSpecificProduct(allProducts, productId);
 
