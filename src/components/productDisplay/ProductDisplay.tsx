@@ -1,16 +1,11 @@
-import { fetchProducts } from "@/api/products/productsApi";
-import { PRODUCT_KEYS } from "@/constants";
-import { useQueryParamData } from "@/hooks";
+import { useGetProductsQuery } from "@/hooks";
 import { ProductCard } from "../productCard";
 import { SingleProductModal } from "../shared/modal/singleProductModal/SingleProductModal";
 import { useState } from "react";
 
 export const ProductDisplay = () => {
   const [productId, setProductId] = useState<number | null>(null);
-  const { data, isLoading } = useQueryParamData(
-    [PRODUCT_KEYS.products],
-    fetchProducts,
-  );
+  const { data, isLoading } = useGetProductsQuery();
 
   const onModalClose = () => {
     setProductId(null);
