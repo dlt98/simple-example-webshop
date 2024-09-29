@@ -15,7 +15,7 @@ export const ProductDisplay = () => {
   };
 
   return (
-    <div>
+    <div className="space-y-5">
       <div className="grid grid-cols-1 gap-6 xs:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         {isLoading ? (
           <div>THIS IS FETCHING</div>
