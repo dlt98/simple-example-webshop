@@ -1,6 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import { ModalHeader } from "./components";
 import { ReactNode } from "react";
+import { useBodyScroll } from "@/hooks";
 
 interface ModalProps {
   isOpen: boolean;
@@ -35,6 +36,8 @@ export const Modal = ({
   footerClassName,
   closeButtonClassName,
 }: ModalProps) => {
+  useBodyScroll(isOpen);
+
   return (
     <div
       className={twMerge(
@@ -46,7 +49,7 @@ export const Modal = ({
     >
       <div
         className={twMerge(
-          "w-full rounded-lg shadow-xl transition-all duration-300 ease-in-out",
+          "mx-5 w-full rounded-lg shadow-xl transition-all duration-300 ease-in-out",
           maxWidth,
           modalBgColor,
           isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0",
