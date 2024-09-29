@@ -6,3 +6,4 @@ export * from "./Divider";
 export * from "./sidebar";
 export * from "./ChevronButton";
 export * from "./imageCarousel";
+export * from "./pagination";
