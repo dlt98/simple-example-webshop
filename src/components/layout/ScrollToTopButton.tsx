@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Button, BUTTON_VARIANT } from "../core";
 import { twMerge } from "tailwind-merge";
+import { Button, BUTTON_VARIANT } from "@/components/core";
 
 const SCROLL_TRIGGER = 500;
 
-const ScrollToTop = () => {
+export const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleScroll = () => {
@@ -39,5 +39,3 @@ const ScrollToTop = () => {
     </Button>
   );
 };
-
-export default ScrollToTop;

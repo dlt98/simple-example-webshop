@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import Navigation from "./navigation/Navigation";
 import { Footer } from "./footer";
-import ScrollToTop from "./ScrollToTopButton";
+import { Navigation } from "./navigation";
+import { ScrollToTop } from "./ScrollToTopButton";
 
 interface IProps {
   children: ReactNode;

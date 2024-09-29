@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import shoppingCartIcon from "../../../../assets/icons/shopping_cart.svg";
+import shoppingCartIcon from "@/assets/icons/shopping_cart.svg";
 import { twMerge } from "tailwind-merge";
-import { ICartSingleProduct } from "../../../../models";
+import { ICartSingleProduct } from "@/models";
 
-const CartButton = ({
+export const CartButton = ({
   cartProducts,
 }: {
   cartProducts: ICartSingleProduct[];
@@ -43,5 +43,3 @@ const CartButton = ({
     </div>
   );
 };
-
-export default CartButton;

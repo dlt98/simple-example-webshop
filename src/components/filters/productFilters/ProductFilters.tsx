@@ -1,6 +1,6 @@
-import { useGetProductsQuery } from "../../../hooks";
-import CategorySelect from "./categorySelect/CategorySelect";
-import { FILTER_QUERY_KEYS } from "./constants";
+import { FILTER_QUERY_KEYS } from "@/constants";
+import { useGetProductsQuery } from "@/hooks";
+import { CategorySelect } from "./categorySelect";
 import { OrderSelect } from "./orderSelect";
 import { SearchInput } from "./searchInput";
 

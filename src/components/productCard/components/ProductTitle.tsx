@@ -1,10 +1,10 @@
-import { Ellipsis } from "../../shared";
+import { Ellipsis } from "@/components/shared";
 
 interface IProps {
   title: string;
 }
 
-const ProductTitle = ({ title }: IProps) => {
+export const ProductTitle = ({ title }: IProps) => {
   return (
     <h2 className="w-full">
       <Ellipsis
@@ -14,5 +14,3 @@ const ProductTitle = ({ title }: IProps) => {
     </h2>
   );
 };
-
-export default ProductTitle;

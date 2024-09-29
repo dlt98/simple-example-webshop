@@ -1,11 +1,12 @@
+import { ISingleSelectItem, Select } from "@/components/core";
+import { FILTER_QUERY_KEYS } from "@/constants/filterKeys";
+import { useGetCategoriesQuery, useGetProductsQuery } from "@/hooks";
+import { useRef, useState, useEffect } from "react";
 import { SingleValue } from "react-select";
-import { Select, ISingleSelectItem } from "../../../core";
-import { FILTER_QUERY_KEYS } from "../constants";
-import { useEffect, useRef, useState } from "react";
-import { findCategoryItem } from "./utils";
-import { useGetCategoriesQuery, useGetProductsQuery } from "../../../../hooks";
 
-const CategorySelect = () => {
+import { findCategoryItem } from "./utils";
+
+export const CategorySelect = () => {
   const { parsedCategories, isFetching } = useGetCategoriesQuery();
   const { setQueryParam, getQueryParam, searchParams } = useGetProductsQuery();
   const { current: selectedQueryParam } = useRef(
@@ -61,5 +62,3 @@ const CategorySelect = () => {
     </div>
   );
 };
-
-export default CategorySelect;

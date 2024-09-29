@@ -1,4 +1,4 @@
-import ReactLogo from "../../assets/images/react-logo.png";
+import ReactLogo from "@/assets/images/react-logo.png";
 
 export const Logo = () => {
   return (

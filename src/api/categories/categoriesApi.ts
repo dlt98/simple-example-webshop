@@ -1,5 +1,5 @@
 import { CATEGORY_ROUTES } from ".";
-import { IAllCAtegoriesRes } from "../../types";
+import { IAllCAtegoriesRes } from "@/types";
 
 export const fetchAllCategories = async (): Promise<IAllCAtegoriesRes> => {
   const response = await fetch(CATEGORY_ROUTES.allCategories);

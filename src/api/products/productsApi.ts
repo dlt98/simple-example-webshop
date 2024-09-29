@@ -1,7 +1,7 @@
+import { FILTER_QUERY_KEYS } from "@/constants/filterKeys";
 import { PRODUCT_ROUTES } from ".";
-import { FILTER_QUERY_KEYS } from "../../components/filters/productFilters/constants";
-import { IProductQueryParams, QueryParams } from "../../hooks";
-import { IProductFetchRes } from "../../types";
+import { QueryParams, IProductQueryParams } from "@/hooks";
+import { IProductFetchRes } from "@/types";
 
 export const fetchProducts = async (
   query: QueryParams | null,

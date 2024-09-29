@@ -1,11 +1,14 @@
-import { Badge, EBadgeVariant } from "../../shared";
+import { Badge, EBadgeVariant } from "@/components/shared";
 
 export interface IProductPriceProps {
   price: number;
   discountPercentage?: number;
 }
 
-const ProductPrice = ({ price, discountPercentage }: IProductPriceProps) => {
+export const ProductPrice = ({
+  price,
+  discountPercentage,
+}: IProductPriceProps) => {
   // Calculate the discounted price
   const discountedPrice = discountPercentage
     ? price - price * (discountPercentage / 100)
@@ -25,5 +28,3 @@ const ProductPrice = ({ price, discountPercentage }: IProductPriceProps) => {
     </div>
   );
 };
-
-export default ProductPrice;

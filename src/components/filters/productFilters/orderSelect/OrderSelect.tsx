@@ -1,9 +1,9 @@
-import { ISetQueryParamFunc } from "../../../../hooks";
 import { useEffect, useState } from "react";
 import { SORT_OPTIONS } from "./constants";
 import { SingleValue } from "react-select";
-import { ISingleSelectItem, Select } from "../../../core";
 import { generateSortQuery } from "./utils";
+import { ISetQueryParamFunc } from "@/hooks";
+import { ISingleSelectItem, Select } from "@/components/core";
 
 interface IProps {
   selectedQueryParam: string | null;

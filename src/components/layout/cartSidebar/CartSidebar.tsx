@@ -1,11 +1,9 @@
-import Sidebar from "../../shared/sidebar/Sidebar";
-import { useCart } from "../../../hooks";
-import { SingleCartItem } from "./components/SingleCartItem";
-import CartButton from "./components/CartButton";
-import { Button, BUTTON_VARIANT } from "../../core";
-import { Divider } from "../../shared";
+import { Button, BUTTON_VARIANT } from "@/components/core";
+import { Divider, Sidebar } from "@/components/shared";
+import { useCart } from "@/hooks";
+import { CartButton, SingleCartItem } from "./components";
 
-const CartSidebar = () => {
+export const CartSidebar = () => {
   const { cart, cartTotal, upsertCartMutation } = useCart();
 
   return (
@@ -30,5 +28,3 @@ const CartSidebar = () => {
     </Sidebar>
   );
 };
-
-export default CartSidebar;

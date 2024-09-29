@@ -1,8 +1,7 @@
-import Sidebar from "../../../shared/sidebar/Sidebar";
-import burgerMenuIcon from "../../.././../assets/icons/png/burger-menu-icon.png";
-import { ESidebarPosition } from "../../../shared/sidebar";
+import { Sidebar, ESidebarPosition } from "@/components/shared";
+import burgerMenuIcon from "@/assets/icons/png/burger-menu-icon.png";
+import { useMobileCheck } from "@/hooks";
 import { ReactNode } from "react";
-import { useMobileCheck } from "../../../../hooks";
 
 interface IProps {
   menuItems: ReactNode;
