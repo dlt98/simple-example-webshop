@@ -18,9 +18,10 @@ export const useCart = () => {
   const queryClient = useQueryClient();
   const { getUpdatedQueryKey } = useGetProductsQuery();
 
-  const { data: cart = DEFAULT_CART, refetch } = useQuery<ICartLocalStorage>({
+  const { data: cart = DEFAULT_CART } = useQuery<ICartLocalStorage>({
     queryKey: [CART_KEYS.cart],
     queryFn: getCartFromStorage,
+    structuralSharing: false,
   });
 
   const cartTotal = formatDecimals(
@@ -82,6 +83,5 @@ export const useCart = () => {
     cart,
     cartTotal,
     clearCart,
-    refetch,
   };
 };

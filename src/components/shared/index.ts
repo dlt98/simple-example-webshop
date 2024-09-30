@@ -7,3 +7,5 @@ export * from "./sidebar";
 export * from "./ChevronButton";
 export * from "./imageCarousel";
 export * from "./pagination";
+export * from "./modal";
+export * from "./Spinner";
