@@ -1,8 +1,8 @@
 import { useGetProductsQuery } from "@/hooks";
 import { ProductCard } from "../productCard";
-import { SingleProductModal } from "../shared/modal/singleProductModal/SingleProductModal";
+
 import { useState } from "react";
-import { Pagination } from "../shared";
+import { Pagination, SingleProductModal, Spinner } from "@/components/shared";
 
 const MAX_PER_PAGE = 20;
 
@@ -18,7 +18,7 @@ export const ProductDisplay = () => {
     <div className="space-y-5">
       <div className="grid grid-cols-1 gap-6 xs:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         {isLoading ? (
-          <div>THIS IS FETCHING</div>
+          <Spinner />
         ) : (
           data?.products.map(
             ({
