@@ -10,8 +10,6 @@ interface IProps {
 export const SingleProductModal = ({ productId, onModalClose }: IProps) => {
   const { data, isFetching } = useGetSingleProductQuery(productId);
 
-  console.log("data", data);
-
   return (
     <Modal
       isOpen={!!productId}
