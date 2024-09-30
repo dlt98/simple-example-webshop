@@ -8,7 +8,7 @@ export const loginUser = async ({
 }: {
   username: string;
   password: string;
-  expiresInMins: number;
+  expiresInMins?: number;
 }): Promise<IUser | null> => {
   const response = await fetch(AUTH_ROUTES.login, {
     method: "POST",

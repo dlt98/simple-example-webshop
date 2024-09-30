@@ -12,7 +12,7 @@ enum COOKIE_NAMES {
 
 const ALL_COOKIE_KEYS = [COOKIE_NAMES.accessToken, COOKIE_NAMES.refreshToken];
 
-const useAuth = () => {
+export const useAuth = () => {
   const [user, setUser] = useState<IUser | null>(null);
   const [cookies, setCookie, removeCookie] = useCookies(ALL_COOKIE_KEYS);
 
@@ -34,6 +34,7 @@ const useAuth = () => {
   const logout = () => {
     setUser(null);
     removeCookie(COOKIE_NAMES.accessToken);
+    removeCookie(COOKIE_NAMES.refreshToken);
     queryClient.clear();
   };
 
@@ -60,5 +61,3 @@ const useAuth = () => {
     isError: login.isError,
   };
 };
-
-export { useAuth };

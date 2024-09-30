@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDebounce } from ".";
 
-const useOverflowCheck = () => {
+export const useOverflowCheck = () => {
   const textRef = useRef<HTMLDivElement | null>(null);
   const [isOverflown, setIsOverflown] = useState(false);
 
@@ -25,5 +25,3 @@ const useOverflowCheck = () => {
 
   return { textRef, isOverflown };
 };
-
-export default useOverflowCheck;
