@@ -5,4 +5,6 @@ export const FILTER_QUERY_KEYS = {
     title: "title",
     price: "price",
   },
+  skip: "skip",
+  limit: "limit",
 };
