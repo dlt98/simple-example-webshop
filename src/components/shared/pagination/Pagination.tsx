@@ -18,10 +18,7 @@ export function Pagination({ className, ...otherProps }: IPaginationProps) {
 
   return (
     <nav
-      className={twMerge(
-        "flex items-center justify-center space-x-2",
-        className,
-      )}
+      className={twMerge("flexCenter space-x-2", className)}
       aria-label="Pagination"
     >
       <PaginationNavigation
@@ -29,13 +26,15 @@ export function Pagination({ className, ...otherProps }: IPaginationProps) {
         isDisabled={isFirstPage}
         text="Previous"
       />
-      {pageNumbers.map((pageNum) => (
-        <PaginationNumber
-          isCurrentPage={pageNum === currentPage}
-          onClick={() => onPageChange(pageNum)}
-          number={pageNum}
-        />
-      ))}
+      <div className="flexCenter flex-wrap">
+        {pageNumbers.map((pageNum) => (
+          <PaginationNumber
+            isCurrentPage={pageNum === currentPage}
+            onClick={() => onPageChange(pageNum)}
+            number={pageNum}
+          />
+        ))}
+      </div>
       <PaginationNavigation
         onClick={handleNextPage}
         isDisabled={isLastPage}
