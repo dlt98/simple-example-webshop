@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getCurrentUser, loginUser } from "@/api/auth/authenticationApi";
+import { getCurrentUser, loginUser, refreshAccessToken } from "@/api";
 import { IUser } from "@/types";
 import { useCookies } from "react-cookie";
 import { AUTH_KEYS } from "@/constants";
@@ -38,20 +38,37 @@ export const useAuth = () => {
     queryClient.clear();
   };
 
-  const { data: userData, isLoading: userLoading } = useQuery({
+  const refreshTokens = async () => {
+    const refreshToken = cookies.refresh_token;
+    if (!refreshToken) return null;
+
+    const response = await refreshAccessToken(refreshToken);
+    return response.accessToken;
+  };
+
+  const { isLoading: userLoading } = useQuery({
     queryKey: [AUTH_KEYS.user],
     queryFn: async () => {
       const { access_token } = cookies;
       if (!access_token) return null;
 
-      const response = await getCurrentUser(access_token);
+      try {
+        const response = await getCurrentUser(access_token);
 
-      return response;
+        return response;
+      } catch (error) {
+        const newAccessToken = await refreshTokens();
+
+        if (newAccessToken) {
+          setCookie(COOKIE_NAMES.accessToken, newAccessToken);
+          return await getCurrentUser(newAccessToken);
+        }
+
+        throw error;
+      }
     },
     enabled: !!cookies.access_token,
   });
-
-  console.log("userData", userData);
 
   return {
     user,
