@@ -32,6 +32,7 @@ export function Pagination({ className, ...otherProps }: IPaginationProps) {
             isCurrentPage={pageNum === currentPage}
             onClick={() => onPageChange(pageNum)}
             number={pageNum}
+            key={pageNum}
           />
         ))}
       </div>
