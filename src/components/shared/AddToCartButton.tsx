@@ -6,10 +6,19 @@ interface IProps {
   productId: number;
 }
 export const AddToCartButton = ({ productId }: IProps) => {
-  const { upsertCartMutation } = useCart();
+  const {
+    upsertCartMutation: { mutateAsync },
+    cart,
+  } = useCart();
 
   const onClickHandler = async () => {
-    await upsertCartMutation.mutateAsync({ productId });
+    const cartItem = cart.products.find((product) => product.id === productId);
+
+    const currentAmount = cartItem?.amount;
+    await mutateAsync({
+      productId,
+      amount: currentAmount ? currentAmount + 1 : currentAmount,
+    });
   };
 
   return (
