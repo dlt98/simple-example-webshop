@@ -1,11 +1,15 @@
-import { IUser, IUserCredentials } from "@/types";
+import { IFullUser, IUser, IUserCredentials } from "@/types";
 import { AUTH_ROUTES } from "./auth.routes";
 
-export const loginUser = async (
-  username: string,
-  password: string,
-  expiresInMins: number = 60,
-): Promise<IUser | null> => {
+export const loginUser = async ({
+  username,
+  password,
+  expiresInMins = 60,
+}: {
+  username: string;
+  password: string;
+  expiresInMins: number;
+}): Promise<IUser | null> => {
   const response = await fetch(AUTH_ROUTES.login, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -21,7 +25,7 @@ export const loginUser = async (
 
 export const getCurrentUser = async (
   accessToken: string,
-): Promise<IUser | null> => {
+): Promise<IFullUser | null> => {
   const response = await fetch(AUTH_ROUTES.currentUser, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
