@@ -23,7 +23,7 @@ export const ProductFilters = () => {
   };
 
   return (
-    <div className="flex gap-4">
+    <div className="gap-4 md:flex">
       <SearchInput />
       <CategorySelect />
       <OrderSelect

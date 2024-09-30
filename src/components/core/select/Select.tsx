@@ -31,7 +31,7 @@ export const Select = ({
           {label}
         </label>
       )}
-      <div className="flexCenter">
+      <div className="flex items-center gap-2">
         <ReactSelect
           id={id}
           options={options}
