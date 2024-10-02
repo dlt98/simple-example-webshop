@@ -18,7 +18,7 @@ export const Badge = ({
   return (
     <div
       className={twMerge(
-        "flexCenter disabled:bg-neutral900 disabled:text-neutral800 gap-1.5 rounded-full px-1.5 py-[1px] transition-all",
+        "flexCenter disabled:bg-neutral900 disabled:text-neutral800 w-max gap-1.5 rounded-full px-2 py-[1px] transition-all",
         badgeStyles[variant],
         className,
       )}
