@@ -16,12 +16,10 @@ export const usePagination = ({
   const [totalItems, setTotalItems] = useState(total || 0);
 
   useEffect(() => {
-    if (page === DEFAULT_PAGE_NUM) return;
-
     setQueryParam([
       {
         key: FILTER_QUERY_KEYS.page,
-        value: page.toString(),
+        value: page === DEFAULT_PAGE_NUM ? undefined : page.toString(),
       },
     ]);
   }, [page]);
