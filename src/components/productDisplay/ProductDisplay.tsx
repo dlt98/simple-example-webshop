@@ -8,11 +8,16 @@ const MAX_PER_PAGE = 20;
 
 export const ProductDisplay = () => {
   const [productId, setProductId] = useState<number | null>(null);
-  const { data, isLoading, setQueryParam } = useGetProductsQuery();
+  const { data, isLoading, setQueryParam, error } = useGetProductsQuery();
 
   const onModalClose = () => {
     setProductId(null);
   };
+
+  if (error) {
+    console.log("error", error);
+    return <div>ERRRO HAS OCCURED</div>;
+  }
 
   return (
     <div className="space-y-5">

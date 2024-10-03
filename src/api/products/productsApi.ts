@@ -6,9 +6,10 @@ import { appendToUrl } from "./utils";
 export const fetchProducts = async (
   query: QueryParams | IProductQueryParams | null,
 ): Promise<IProductFetchRes> => {
-  const url = query
-    ? appendToUrl(PRODUCT_ROUTES.products, query as IProductQueryParams)
-    : PRODUCT_ROUTES.products;
+  const url = appendToUrl(
+    PRODUCT_ROUTES.products,
+    query as IProductQueryParams,
+  );
 
   const response = await fetch(url);
 
