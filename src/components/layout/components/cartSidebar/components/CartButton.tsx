@@ -24,7 +24,7 @@ export const CartButton = ({
   }, [cartProducts]);
 
   return (
-    <div className="relative">
+    <div className="relative" test-data="cart-button">
       <img
         src={shoppingCartIcon}
         alt="shopping cart icon"

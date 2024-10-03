@@ -13,7 +13,7 @@ export const CartSidebar = () => {
       title="Shopping cart"
       triggerButton={<CartButton cartProducts={cart.products} />}
       className="bg-white"
-      canvasClassName="mt-5"
+      canvasClassName="mt-5 cart-sidebar-container"
     >
       <div className="flex flex-col items-center gap-3">
         <h3 className="text-lg font-bold">
