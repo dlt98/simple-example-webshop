@@ -15,9 +15,9 @@ export const appendToUrl = (
   queryInitial: IProductQueryParams | null,
 ) => {
   const searchParams = new URLSearchParams(window.location.search);
-  const query = replaceFilterKeys(queryInitial);
+  addDefaultValues(searchParams);
 
-  console.log("query", query);
+  const query = replaceFilterKeys(queryInitial);
 
   if (query?.category) {
     baseUrl = `${baseUrl}/category/${query.category}`;
@@ -32,16 +32,12 @@ export const appendToUrl = (
     searchParams.delete(FILTER_QUERY_KEYS.search);
   }
 
-  addDefaultValues(searchParams);
-
   if (queryInitial) addQueryDataToQueryParams(query, searchParams);
 
   const newQueryString = searchParams.toString();
 
   const res = `${baseUrl}${newQueryString ? `?${newQueryString}` : ""}`;
 
-  console.log("res", res);
-  console.log("-----");
   return res;
 };
 
@@ -62,26 +58,6 @@ function addQueryDataToQueryParams(query: any, searchParams: URLSearchParams) {
   });
 }
 
-// function replaceFilterKeys(query: any) {
-//   const newQuery = { ...query };
-
-//   Object.keys(query).forEach((key) => {
-//     if (API_FILTER_REPLACEMENT_KEYS[key]) {
-//       if (key === FILTER_QUERY_KEYS.page) {
-//         const pageAmount = newQuery[key];
-//         const skip = (pageAmount - 1) * DEFAULT_VALUES[API_FILTER_REPLACEMENT_KEYS.limit]; // Calculate skip based on current page
-//         newQuery[API_FILTER_REPLACEMENT_KEYS[key]] = skip;
-//       } else {
-//         newQuery[API_FILTER_REPLACEMENT_KEYS[key]] = newQuery[key];
-//       }
-
-//       delete newQuery[key];
-//     }
-//   });
-
-//   return newQuery;
-// }
-
 export const replaceFilterKeys = (query: any | null) => {
   if (!query) return query;
 
@@ -90,6 +66,15 @@ export const replaceFilterKeys = (query: any | null) => {
   Object.keys(query).forEach((key) => {
     if (API_FILTER_REPLACEMENT_KEYS[key]) {
       newQuery[API_FILTER_REPLACEMENT_KEYS[key]] = newQuery[key];
+
+      // Checks if the page exists, if so it will take the page number, and add the limit so it knows how many items to skip in the query
+      if (key === FILTER_QUERY_KEYS.page) {
+        const pageAmount = +newQuery[key];
+        const skip = (pageAmount - 1) * DEFAULT_VALUES[FILTER_QUERY_KEYS.limit]; // Calculate skip based on current page
+
+        newQuery[API_FILTER_REPLACEMENT_KEYS[key]] = skip;
+      }
+
       delete newQuery[key];
     }
   });
