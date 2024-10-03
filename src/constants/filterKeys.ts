@@ -24,16 +24,3 @@ export const API_FILTER_KEYS = {
   },
   skip: "skip",
 };
-
-export const replaceFilterKeys = (query: any) => {
-  const newQuery = { ...query };
-
-  Object.keys(query).forEach((key) => {
-    if (API_FILTER_REPLACEMENT_KEYS[key]) {
-      newQuery[API_FILTER_REPLACEMENT_KEYS[key]] = newQuery[key];
-      delete newQuery[key];
-    }
-  });
-
-  return newQuery;
-};
