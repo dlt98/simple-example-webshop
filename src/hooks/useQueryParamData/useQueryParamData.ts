@@ -83,15 +83,13 @@ export const useQueryParamData = <T>(
     [searchParams],
   );
 
-  const { data, isLoading, error } = useQuery<T, unknown>({
+  const queryData = useQuery<T, unknown>({
     queryKey: getUpdatedQueryKey(),
     queryFn: () => fetchFunction(getAllQueryParams()),
   });
 
   return {
-    data,
-    isLoading,
-    error,
+    ...queryData,
     setQueryParam,
     getQueryParam,
     getAllQueryParams,

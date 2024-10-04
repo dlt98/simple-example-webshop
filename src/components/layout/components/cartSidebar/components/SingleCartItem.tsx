@@ -24,7 +24,10 @@ export const SingleCartItem = ({
   };
 
   return (
-    <div className="flex w-full items-center gap-4 rounded-lg border bg-white p-4 shadow-md max-sm:flex-col">
+    <div
+      className="flex w-full items-center gap-4 rounded-lg border bg-white p-4 shadow-md max-sm:flex-col"
+      test-data="single-cart-item"
+    >
       <div className="flexCenter">
         <img
           src={imageSrc}

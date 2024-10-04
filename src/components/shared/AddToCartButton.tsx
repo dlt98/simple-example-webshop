@@ -32,6 +32,7 @@ export const AddToCartButton = ({ productId }: IProps) => {
           className="mr-2 size-5"
         />
       }
+      test-data="add-to-cart-button"
     >
       Add to cart
     </Button>
