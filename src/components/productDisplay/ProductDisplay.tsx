@@ -8,7 +8,8 @@ const MAX_PER_PAGE = 20;
 
 export const ProductDisplay = () => {
   const [productId, setProductId] = useState<number | null>(null);
-  const { data, isLoading, setQueryParam, error } = useGetProductsQuery();
+  const { data, isLoading, setQueryParam, error, searchParams, getQueryParam } =
+    useGetProductsQuery();
 
   const onModalClose = () => {
     setProductId(null);
@@ -55,6 +56,8 @@ export const ProductDisplay = () => {
         limit={MAX_PER_PAGE}
         setQueryParam={setQueryParam}
         isFetching={isLoading}
+        searchParams={searchParams}
+        getQueryParam={getQueryParam}
       />
       <SingleProductModal productId={productId} onModalClose={onModalClose} />
     </div>

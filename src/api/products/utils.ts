@@ -44,9 +44,6 @@ export const appendToUrl = (
 function addDefaultValues(searchParams: URLSearchParams) {
   Object.entries(DEFAULT_VALUES).forEach(([key, value]) => {
     if (!searchParams.has(key)) {
-      console.log("key", key);
-      console.log("value", value);
-
       searchParams.append(key, value.toString());
     }
   });
@@ -58,6 +55,7 @@ function addQueryDataToQueryParams(query: any, searchParams: URLSearchParams) {
   });
 }
 
+// Function used to replace the query keys that are used in the frontend but not in the API
 export const replaceFilterKeys = (query: any | null) => {
   if (!query) return query;
 

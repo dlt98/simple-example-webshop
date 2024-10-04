@@ -11,6 +11,8 @@ export const usePagination = ({
   limit,
   setQueryParam,
   isFetching,
+  searchParams,
+  getQueryParam,
 }: IProps) => {
   const [page, setPage] = useState(DEFAULT_PAGE_NUM);
   const [totalItems, setTotalItems] = useState(total || 0);
@@ -23,6 +25,13 @@ export const usePagination = ({
       },
     ]);
   }, [page]);
+
+  // Resets the page to the default value if the pageNumber is gone
+  useEffect(() => {
+    if (!getQueryParam(FILTER_QUERY_KEYS.page)) {
+      setPage(DEFAULT_PAGE_NUM);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     if (!isFetching && total) setTotalItems(total);
