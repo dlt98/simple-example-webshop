@@ -7,7 +7,7 @@ import {
   setCartToStorage,
   setProductAmount,
 } from "./utils";
-import { ICartLocalStorage, ICartSingleProduct } from "@/models";
+import { ICartLocalStorage } from "@/models";
 import { DEFAULT_CART } from "./constants";
 import { toast } from "react-toastify";
 import { IUpsertCartMutationData } from "./types";
@@ -33,29 +33,40 @@ export const useCart = () => {
 
   const upsertCartMutation = useMutation({
     mutationFn: ({ productId, amount = 1 }: IUpsertCartMutationData) => {
-      const allProducts =
-        queryClient.getQueryData<IProductFetchRes>(getUpdatedQueryKey());
+      let productToUpsert = cart.products.find(
+        (product) => product.id === productId,
+      );
 
-      const productData = findSpecificProduct(allProducts, productId);
+      if (!productToUpsert) {
+        const allProducts =
+          queryClient.getQueryData<IProductFetchRes>(getUpdatedQueryKey());
 
-      if (!productData) {
-        // This should never happen
-        toast("Error fetching products", {
-          type: "error",
-        });
+        const productData = findSpecificProduct(allProducts, productId);
 
-        return Promise.reject();
+        if (!productData) {
+          // This should never happen
+          toast("Error fetching products", {
+            type: "error",
+          });
+
+          return Promise.reject();
+        }
+
+        productToUpsert = {
+          amount,
+          id: productId,
+          imageSrc: productData.thumbnail,
+          name: productData.title,
+          price: productData.price,
+        };
+      } else {
+        productToUpsert = { ...productToUpsert, amount };
       }
 
-      const product: ICartSingleProduct = {
-        amount,
-        id: productId,
-        imageSrc: productData.thumbnail,
-        name: productData.title,
-        price: productData.price,
-      };
-
-      const updatedLocalStorage = setProductAmount({ ...cart }, product);
+      const updatedLocalStorage = setProductAmount(
+        { ...cart },
+        productToUpsert,
+      );
 
       setCartToStorage(updatedLocalStorage);
 
