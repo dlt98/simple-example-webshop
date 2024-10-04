@@ -6,7 +6,7 @@ import { Layout } from "@/components/layout";
 
 function App() {
   return (
-    <Layout className="space-y-5">
+    <Layout className="flex flex-col gap-5">
       <ProductFilters />
       <ProductDisplay />
       <ToastContainer position="bottom-center" />
