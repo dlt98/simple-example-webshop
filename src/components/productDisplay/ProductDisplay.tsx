@@ -16,7 +16,6 @@ export const ProductDisplay = () => {
   };
 
   if (error) {
-    console.log("error", error);
     return <div>ERRRO HAS OCCURED</div>;
   }
 
