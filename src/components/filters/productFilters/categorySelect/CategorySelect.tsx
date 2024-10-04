@@ -32,7 +32,7 @@ export const CategorySelect = () => {
     setQueryParam([
       { key: FILTER_QUERY_KEYS.category, value: newValue?.value },
       { key: FILTER_QUERY_KEYS.search },
-      { key: FILTER_QUERY_KEYS.skip, value: "0" },
+      { key: FILTER_QUERY_KEYS.page },
     ]);
   };
 

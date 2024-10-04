@@ -6,4 +6,6 @@ export interface IPaginationProps {
   className?: string;
   setQueryParam: ISetQueryParamFunc;
   isFetching?: boolean;
+  searchParams: URLSearchParams;
+  getQueryParam: (key: string) => string | null;
 }

@@ -16,7 +16,7 @@ export const SearchInput = () => {
       setQueryParam([
         { key: FILTER_QUERY_KEYS.search, value: term },
         { key: FILTER_QUERY_KEYS.category },
-        { key: FILTER_QUERY_KEYS.skip, value: "0" },
+        { key: FILTER_QUERY_KEYS.page },
       ]);
     },
     [setQueryParam],
