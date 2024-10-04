@@ -1,7 +1,7 @@
 import { useGetProductsQuery } from "@/hooks";
 import { ProductCard } from "../productCard";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pagination, SingleProductModal, Spinner } from "@/components/shared";
 
 const MAX_PER_PAGE = 20;
@@ -13,7 +13,20 @@ export const ProductDisplay = () => {
 
   const onModalClose = () => {
     setProductId(null);
+    setQueryParam([{ key: "product" }]);
   };
+
+  const onModalOpen = (productId: number) => {
+    setProductId(productId);
+
+    setQueryParam([{ key: "product", value: productId.toString() }]);
+  };
+
+  useEffect(() => {
+    const existingProductId = getQueryParam("product");
+
+    if (existingProductId) setProductId(+existingProductId);
+  }, []);
 
   if (error) {
     return <div>ERRRO HAS OCCURED</div>;
@@ -42,7 +55,7 @@ export const ProductDisplay = () => {
                   price={price}
                   discountPercentage={discountPercentage}
                   image={thumbnail}
-                  onClick={() => setProductId(id)}
+                  onClick={() => onModalOpen(id)}
                   key={id}
                 />
               );
